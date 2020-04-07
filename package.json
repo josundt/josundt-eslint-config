@@ -1,0 +1,38 @@
+{
+  "name": "@josundt/eslint-config",
+  "version": "1.0.0",
+  "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "lint": "echo \"No linting for this project\"",
+    "build": "echo \"No build for this project\"",
+    "test": "echo \"No tests for this project\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josundt/josundt-eslint-config.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslintrc"
+  ],
+  "author": {
+    "name": "Jørn Andre Sundt",
+    "email": "jorn.andre.sundt@jasmin.no"
+  },
+  "license": "ISC",
+  "files": [
+    "*.js",
+    "rules/**/*.js"
+  ],
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "2.27.0",
+    "@typescript-eslint/parser": "2.27.0",
+    "eslint": "6.8.0",
+    "eslint-import-resolver-typescript": "2.0.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jasmine": "4.1.0",
+    "eslint-plugin-jsdoc": "22.1.0",
+    "eslint-plugin-unicorn": "18.0.1"
+  }
+}
