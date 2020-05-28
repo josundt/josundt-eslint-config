@@ -9,6 +9,7 @@ module.exports = {
         "sourceType": "module"
     },
     "extends": [
+        "./rules/deprecation.js",
         "./rules/eslint.js",
         "./rules/import-typescript.js",
         "./rules/jasmine.js",
