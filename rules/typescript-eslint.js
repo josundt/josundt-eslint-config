@@ -1,6 +1,73 @@
+const eslintRuleSet = require("./eslint");
+const eslintRules = eslintRuleSet.rules;
+
+// Map of all the typescript-eslint extensions, with additional typescript specific properties for a few rules
+const extensions = new Map([
+    ["brace-style", null],
+    ["comma-spacing", null],
+    ["default-param-last", null],
+    ["dot-notation", null],
+    ["func-call-spacing", null],
+    ["indent", null],
+    ["init-declarations", null],
+    ["keyword-spacing", null],
+    ["lines-between-class-members", { "exceptAfterOverload": true }],
+    ["no-array-constructor", null],
+    ["no-dupe-class-members", null],
+    ["no-empty-function", null],
+    ["no-extra-parens", null],
+    ["no-extra-semi", null],
+    ["no-invalid-this", null],
+    ["no-loop-func", null],
+    ["no-loss-of-precision", null],
+    ["no-magic-numbers", null],
+    ["no-shadow", {
+        "ignoreTypeValueShadow": true,
+        "ignoreFunctionTypeParameterNameValueShadow": true
+    }],
+    ["no-unused-expressions", null],
+    ["no-unused-vars", null],
+    ["no-use-before-define", null],
+    ["no-useless-constructor", null],
+    ["quotes", null],
+    ["require-await", null],
+    ["return-await", null],
+    ["semi", null],
+    ["space-before-function-paren", null],
+]);
+
+switchOffExtensions = new Set([
+    "no-unused-vars",
+    "no-invalid-this",
+    "no-use-before-define",
+    "no-useless-constructor"
+]);
+
+// Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
+const extensionRules = Object.entries(eslintRules).reduce((extRules, [key, value]) => {
+    const extension = extensions.get(key);
+    if (extension !== undefined) {
+        extRules[key] = "off";
+        if (switchOffExtensions.has(key)) {
+            extRules[`@typescript-eslint/${key}`] = "off";
+        } else {
+            if (extension) {
+                value = [...value];
+                value[value.length - 1] = { ...value[value.length - 1], ...extension }
+            }
+            extRules[`@typescript-eslint/${key}`] = value;
+        }
+    }
+    return extRules;
+}, {});
+
+// console.log(extensionRules);
+// console.log(`Converted ${Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).length} of ${extensions.size} available extension rules`);
+// console.log("Not converted:", Array.from(extensions.keys()).filter(k => !Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).includes(k)));
+
 module.exports = {
     "extends": [
-        "plugin:@typescript-eslint/eslint-recommended",
+        "./eslint",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
@@ -8,6 +75,13 @@ module.exports = {
         "@typescript-eslint/eslint-plugin"
     ],
     "rules": {
+
+        /* Disabling certain eslint rules: */
+
+        "camelCase": "off",
+
+        /* Main @typescript-eslint rules */
+
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/array-type": [
             "error",
@@ -17,17 +91,34 @@ module.exports = {
             }
         ],
         "@typescript-eslint/await-thenable": "error",
-        "@typescript-eslint/ban-ts-ignore": "error",
-        "@typescript-eslint/ban-types": "error",
-        "@typescript-eslint/ban-types": "off", // covered by naming-conventions rule
-        "@typescript-eslint/camelcase": "off", // covered by naming-conventions rule
-        "@typescript-eslint/class-name-casing": "off", // covered by naming-conventions rule
-        "@typescript-eslint/consistent-type-assertions": "off",
-        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/ban-ts-comment": "error",
+        "@typescript-eslint/ban-tslint-comment": "error", // No longer use tslint - remove rules
+        "@typescript-eslint/ban-types": "off", // Can be used to ban certain types
+        "@typescript-eslint/consistent-type-assertions": [
+            "error",
+            {
+                "assertionStyle": "as",
+                "objectLiteralTypeAssertions": "allow"
+            }
+        ],
+        "@typescript-eslint/consistent-type-definitions": [
+            "error",
+            "interface"
+        ],
+        "@typescript-eslint/consistent-type-imports": [
+            "off",
+            {
+                "prefer": "type-imports",
+                "disallowTypeAnnotations": true
+            }
+        ],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
-                "allowExpressions": true
+                "allowExpressions": true,
+                "allowTypedFunctionExpressions": true,
+                "allowHigherOrderFunctions": true,
+                "allowConciseArrowFunctionExpressionsStartingWithVoid": true
             }
         ],
         "@typescript-eslint/explicit-member-accessibility": [
@@ -36,21 +127,16 @@ module.exports = {
                 "accessibility": "no-public"
             }
         ],
-        "@typescript-eslint/indent": [
-            "warn",
-            4,
+        "@typescript-eslint/explicit-module-boundary-types": [ // same as "recommended" except error instead of warning
+            "error",
             {
-                "ObjectExpression": "first",
-                "FunctionDeclaration": {
-                    "parameters": "first"
-                },
-                "FunctionExpression": {
-                    "parameters": "first"
-                },
-                "SwitchCase": 1
+                "allowArgumentsExplicitlyTypedAsAny": false,
+                "allowDirectConstAssertionInArrowFunctions": true,
+                "allowedNames": [],
+                "allowHigherOrderFunctions": true,
+                "allowTypedFunctionExpressions": true,
             }
         ],
-        "@typescript-eslint/interface-name-prefix": "off", // covered by naming-conventions rule
         "@typescript-eslint/member-delimiter-style": [
             "error",
             {
@@ -65,6 +151,7 @@ module.exports = {
             }
         ],
         "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/method-signature-style": "off", // useful rule since lambda method notation enforces stricter type checking, but has somme inconveniences for ovelaoads, "implement interface" refactoring, and general code complexity
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -74,6 +161,12 @@ module.exports = {
                 ],
                 "leadingUnderscore": "forbid",
                 "trailingUnderscore": "forbid"
+            },
+            {
+                "selector": "typeLike",
+                "format": [
+                    "PascalCase"
+                ]
             },
             {
                 "selector": "method",
@@ -98,21 +191,6 @@ module.exports = {
                 "trailingUnderscore": "forbid"
             },
             {
-                "selector": "variable",
-                "format": [
-                    "camelCase"
-                    //, "UPPER_CASE"
-                ],
-                "leadingUnderscore": "forbid",
-                "trailingUnderscore": "forbid"
-            },
-            {
-                "selector": "typeLike",
-                "format": [
-                    "PascalCase"
-                ]
-            },
-            {
                 "selector": "enumMember",
                 "format": [
                     "camelCase",
@@ -120,54 +198,78 @@ module.exports = {
                 ]
             }
         ],
-        "@typescript-eslint/no-empty-function": "error",
+        "@typescript-eslint/no-base-to-string": "error",
+        "@typescript-eslint/no-confusing-non-null-assertion": "error",
+        "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-extra-non-null-assertion": "error",
         "@typescript-eslint/no-extraneous-class": "error",
-        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-floating-promises": "error", // Must be switched on to prevent promises not awaited
         "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/no-implied-eval": "error",
         "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-invalid-void-type": "error",
         "@typescript-eslint/no-misused-new": "error",
+        "@typescript-eslint/no-misused-promises": "error",
         "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-param-reassign": "off",
-        "@typescript-eslint/no-parameter-properties": "off",
-        "@typescript-eslint/no-require-imports": "error",
-        "@typescript-eslint/no-unused-vars": [
+        "@typescript-eslint/no-parameter-properties": [
             "error",
             {
-                "vars": "all",
-                "args": "none"
+                "allows": ["private readonly", "private", "protected readonly"]
             }
         ],
+        "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-throw-literal": "error",
+        "@typescript-eslint/no-type-alias": "off",
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/no-unnecessary-condition": "off", // allow runtime null checks etc even if reported not necessary by type system
         "@typescript-eslint/no-unnecessary-qualifier": "error",
         "@typescript-eslint/no-unnecessary-type-arguments": "off",
         "@typescript-eslint/no-unnecessary-type-assertion": "off",
-        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-unsafe-assignment": "error",
+        "@typescript-eslint/no-unsafe-call": "error",
+        "@typescript-eslint/no-unsafe-member-access": "error",
+        "@typescript-eslint/no-unsafe-return": "error",
+        "@typescript-eslint/no-unused-vars-experimental": "off", // to strict with method params...
         "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/prefer-enum-initializers": "error",
         "@typescript-eslint/prefer-for-of": "error",
         "@typescript-eslint/prefer-function-type": "error",
+        "@typescript-eslint/prefer-includes": "error",
+        "@typescript-eslint/prefer-literal-enum-member": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "@typescript-eslint/prefer-optional-chain": "error",
         "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/prefer-readonly-parameter-types": "off", // Could be useful but requires too much work and verbose notation
+        "@typescript-eslint/prefer-reduce-type-parameter": "error",
+        "@typescript-eslint/prefer-regexp-exec": "error",
+        "@typescript-eslint/prefer-string-starts-ends-with": "error",
+        "@typescript-eslint/prefer-ts-expect-error": "error",
         "@typescript-eslint/promise-function-async": "off",
-        "@typescript-eslint/quotes": [
-            "error",
-            "double"
-        ],
-        "@typescript-eslint/restrict-plus-operands": "off",
-        "@typescript-eslint/semi": [
-            "error",
-            "always"
-        ],
+        "@typescript-eslint/require-array-sort-compare": "error",
+        "@typescript-eslint/restrict-plus-operands": "error",
+        "@typescript-eslint/restrict-template-expressions": "error",
         "@typescript-eslint/strict-boolean-expressions": [
             "off",
             {
-                "allowNullable": true
+                "allowString": true,
+                "allowNumber": true,
+                "allowNullableObject": true,
+                "allowNullableString": true,
+                "allowNullableNumber": true,
+                "allowNullableBoolean": true,
+                "allowAny": false
             }
         ],
+        "@typescript-eslint/switch-exhaustiveness-check": "error",
         "@typescript-eslint/triple-slash-reference": "error",
-        "@typescript-eslint/type-annotation-spacing": "warn",
+        "@typescript-eslint/type-annotation-spacing": "error",
         "@typescript-eslint/typedef": [
             "error",
             {
@@ -180,7 +282,9 @@ module.exports = {
                 "variableDeclaration": false
             }
         ],
-        "@typescript-eslint/unbound-method": "off",
-        "@typescript-eslint/unified-signatures": "off"
+        "@typescript-eslint/unbound-method": "error",
+        "@typescript-eslint/unified-signatures": "off",
+
+        ...extensionRules
     }
 };
