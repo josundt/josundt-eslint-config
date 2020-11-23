@@ -1,9 +1,12 @@
 const eslintRuleSet = require("./eslint");
 const eslintRules = eslintRuleSet.rules;
 
-// Map of all the typescript-eslint extensions, with additional typescript specific properties for a few rules
+// Map of all the typescript-eslint extensions.
+// If extension rule has additional properties compared to standard eslint rule,
+// the value of the map item has an object that will be merged with standard rule; otherwise null.
 const extensions = new Map([
     ["brace-style", null],
+    ["comma-dangle", null],
     ["comma-spacing", null],
     ["default-param-last", null],
     ["dot-notation", null],
@@ -14,6 +17,7 @@ const extensions = new Map([
     ["lines-between-class-members", { "exceptAfterOverload": true }],
     ["no-array-constructor", null],
     ["no-dupe-class-members", null],
+    ["no-duplicate-imports", null],
     ["no-empty-function", null],
     ["no-extra-parens", null],
     ["no-extra-semi", null],
@@ -34,6 +38,7 @@ const extensions = new Map([
     ["return-await", null],
     ["semi", null],
     ["space-before-function-paren", null],
+    ["space-infix-ops", null]
 ]);
 
 switchOffExtensions = new Set([
@@ -44,20 +49,34 @@ switchOffExtensions = new Set([
 ]);
 
 // Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
-const extensionRules = Object.entries(eslintRules).reduce((extRules, [key, value]) => {
+const extendedEslintRules = Object.entries(eslintRules).reduce((extRules, [key, value]) => {
+
+    // Try to get from known extensions map
     const extension = extensions.get(key);
+
+    // If found in known typescript eslint extension rules map
     if (extension !== undefined) {
+
+        // Switch off standard eslint rule
         extRules[key] = "off";
+
+        // Special handling of certain extension rules that need to be switched off:
         if (switchOffExtensions.has(key)) {
             extRules[`@typescript-eslint/${key}`] = "off";
         } else {
-            if (extension) {
+            // If extension rule has extended options, merge with standard eslint rule options:
+            if (extension !== null) {
                 value = [...value];
                 value[value.length - 1] = { ...value[value.length - 1], ...extension }
             }
+            // Add extension rule value with the @typescript-eslint key prefix
             extRules[`@typescript-eslint/${key}`] = value;
         }
+
+
     }
+    // else: if no extension rule exists, the standard eslint rule will be used through the "extends" configuration below
+
     return extRules;
 }, {});
 
@@ -94,6 +113,7 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": "error",
         "@typescript-eslint/ban-tslint-comment": "error", // No longer use tslint - remove rules
         "@typescript-eslint/ban-types": "off", // Can be used to ban certain types
+        "@typescript-eslint/consistent-indexed-object-style": ["error", "record"],
         "@typescript-eslint/consistent-type-assertions": [
             "error",
             {
@@ -200,6 +220,12 @@ module.exports = {
         ],
         "@typescript-eslint/no-base-to-string": "error",
         "@typescript-eslint/no-confusing-non-null-assertion": "error",
+        "@typescript-eslint/no-confusing-void-expression": [
+            "error",
+            {
+                "ignoreArrowShorthand": true
+            }
+        ],
         "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "off",
@@ -209,7 +235,13 @@ module.exports = {
         "@typescript-eslint/no-for-in-array": "error",
         "@typescript-eslint/no-implied-eval": "error",
         "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-invalid-void-type": "error",
+        "@typescript-eslint/no-invalid-void-type": [
+            "error",
+            {
+                "allowInGenericTypeArguments": true,
+                "allowAsThisParameter": true
+            }
+        ],
         "@typescript-eslint/no-misused-new": "error",
         "@typescript-eslint/no-misused-promises": "error",
         "@typescript-eslint/no-namespace": "off",
@@ -230,6 +262,7 @@ module.exports = {
         "@typescript-eslint/no-unnecessary-qualifier": "error",
         "@typescript-eslint/no-unnecessary-type-arguments": "off",
         "@typescript-eslint/no-unnecessary-type-assertion": "off",
+        "@typescript-eslint/no-unnecessary-type-constraint": "error",
         "@typescript-eslint/no-unsafe-assignment": "error",
         "@typescript-eslint/no-unsafe-call": "error",
         "@typescript-eslint/no-unsafe-member-access": "error",
@@ -253,7 +286,12 @@ module.exports = {
         "@typescript-eslint/prefer-ts-expect-error": "error",
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/require-array-sort-compare": "error",
-        "@typescript-eslint/restrict-plus-operands": "error",
+        "@typescript-eslint/restrict-plus-operands": [
+            "error",
+            {
+                "checkCompoundAssignments": true
+            }
+        ],
         "@typescript-eslint/restrict-template-expressions": "error",
         "@typescript-eslint/strict-boolean-expressions": [
             "off",
@@ -285,6 +323,6 @@ module.exports = {
         "@typescript-eslint/unbound-method": "error",
         "@typescript-eslint/unified-signatures": "off",
 
-        ...extensionRules
+        ...extendedEslintRules
     }
 };

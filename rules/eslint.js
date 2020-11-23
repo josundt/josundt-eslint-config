@@ -8,6 +8,13 @@ module.exports = {
             "error",
             "as-needed"
         ],
+        "arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
         "brace-style": [
             "error",
             "1tbs"
@@ -266,6 +273,7 @@ module.exports = {
             "error",
             "never"
         ],
+        "space-infix-ops": "error",
         "spaced-comment": "off",
         "use-isnan": "error",
         "valid-typeof": "error",
