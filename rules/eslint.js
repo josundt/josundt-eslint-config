@@ -226,6 +226,7 @@ module.exports = {
         "no-useless-constructor": "error",
         "no-var": "error",
         "no-void": "error",
+        "object-curly-spacing": ["error", "always"],
         "object-shorthand": [
             "error",
             "never"

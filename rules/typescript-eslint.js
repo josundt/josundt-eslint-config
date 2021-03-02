@@ -33,6 +33,7 @@ const extensions = new Map([
     ["no-unused-vars", null],
     ["no-use-before-define", null],
     ["no-useless-constructor", null],
+    ["object-curly-spacing", null],
     ["quotes", null],
     ["require-await", null],
     ["return-await", null],
@@ -269,6 +270,7 @@ module.exports = {
         "@typescript-eslint/no-unsafe-return": "error",
         "@typescript-eslint/no-unused-vars-experimental": "off", // to strict with method params...
         "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/non-nullable-type-assertion-style": "error",
         "@typescript-eslint/prefer-as-const": "error",
         "@typescript-eslint/prefer-enum-initializers": "error",
         "@typescript-eslint/prefer-for-of": "error",
@@ -293,6 +295,7 @@ module.exports = {
             }
         ],
         "@typescript-eslint/restrict-template-expressions": "error",
+        "@typescript-eslint/sort-type-union-intersection-members": "off",
         "@typescript-eslint/strict-boolean-expressions": [
             "off",
             {

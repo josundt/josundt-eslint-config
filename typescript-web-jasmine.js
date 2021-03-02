@@ -10,7 +10,7 @@ module.exports = {
     },
     "extends": [
         "./rules/deprecation.js",
-        "./rules/eslint.js",
+        // "./rules/eslint.js",  -> commented out since "typescript-eslint" rules inherit from this
         "./rules/import-typescript.js",
         "./rules/jasmine.js",
         "./rules/jsdoc-typescript.js",
