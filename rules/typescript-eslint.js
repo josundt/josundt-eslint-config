@@ -9,12 +9,18 @@ const extensions = new Map([
     ["comma-dangle", null],
     ["comma-spacing", null],
     ["default-param-last", null],
-    ["dot-notation", null],
+    ["dot-notation", {
+        "allowPrivateClassPropertyAccess": false,
+        "allowProtectedClassPropertyAccess": false,
+        "allowIndexSignaturePropertyAccess": false
+    }],
     ["func-call-spacing", null],
     ["indent", null],
     ["init-declarations", null],
     ["keyword-spacing", null],
-    ["lines-between-class-members", { "exceptAfterOverload": true }],
+    ["lines-between-class-members", {
+        "exceptAfterOverload": true
+    }],
     ["no-array-constructor", null],
     ["no-dupe-class-members", null],
     ["no-duplicate-imports", null],
@@ -264,6 +270,7 @@ module.exports = {
         "@typescript-eslint/no-unnecessary-type-arguments": "off",
         "@typescript-eslint/no-unnecessary-type-assertion": "off",
         "@typescript-eslint/no-unnecessary-type-constraint": "error",
+        "@typescript-eslint/no-unsafe-argument": "error",
         "@typescript-eslint/no-unsafe-assignment": "error",
         "@typescript-eslint/no-unsafe-call": "error",
         "@typescript-eslint/no-unsafe-member-access": "error",
