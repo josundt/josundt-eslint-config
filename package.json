@@ -1,8 +1,8 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
-  "main": ".eslintrc.js",
+  "main": "index.js",
   "scripts": {
     "lint": "echo \"No linting for this project\"",
     "build": "echo \"No build for this project\"",
