@@ -61,7 +61,7 @@ module.exports = {
         ],
         "guard-for-in": "error",
         "handle-callback-err": "error",
-        "id-blacklist": [
+        "id-denylist": [
             "error",
             "any",
             "Number",
@@ -86,7 +86,14 @@ module.exports = {
                 "FunctionExpression": {
                     "parameters": "first"
                 },
-                "SwitchCase": 1
+                "SwitchCase": 1,
+
+                // Fix to decorator indentation problem
+                "ignoredNodes": [
+                    "FunctionExpression > .params[decorators.length > 0]",
+                    "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
+                    "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
+                ]
             }
         ],
         "init-declarations": "off",
@@ -236,12 +243,17 @@ module.exports = {
             "never"
         ],
         "padding-line-between-statements": [
-            "off",
-            {
-                "blankLine": "always",
-                "prev": "*",
-                "next": "return"
-            }
+            "error",
+            { "blankLine": "always", "prev": ["directive", "import"],                 "next": "*" },
+            { "blankLine": "any",    "prev": ["directive", "import"],                 "next": ["directive", "import"] },
+
+            { "blankLine": "always", "prev": "*",                                     "next": ["export", "class", "function", "iife"] },
+            { "blankLine": "always", "prev": ["export", "class", "function", "iife"], "next": "*" },
+
+            // { "blankLine": "always", "prev": "*",                                     "next": "return" }, // Newline before return
+
+            // { "blankLine": "always", "prev": "*",                                     "next": "multiline-block-like" }, // Newline BEFORE multiline block
+            // { "blankLine": "always", "prev": "multiline-block-like",                  "next": "*" }                     // Newline AFTER  multiline block
         ],
         "prefer-arrow-callback": "error",
         "prefer-const": "error",
@@ -262,8 +274,12 @@ module.exports = {
             "error",
             "always"
         ],
+        "space-before-blocks": [
+            "error",
+            "always"
+        ],
         "space-before-function-paren": [
-            "warn",
+            "error",
             {
                 "anonymous": "always",
                 "asyncArrow": "always",
