@@ -141,7 +141,9 @@ module.exports = {
         "no-duplicate-imports": "error",
         "no-empty": "error",
         "no-empty-character-class": "error",
-        "no-empty-function": "error",
+        "no-empty-function": ["error", {
+            //allow: [/*"functions", "arrowFunctions", "generatorFunctions", "methods", "generatorMethods", "getters", "setters", "constructors", "asyncFunctions", "asyncMethods"*/]
+        }],
         "no-eval": "error",
         "no-ex-assign": "error",
         "no-extra-bind": "error",
@@ -205,7 +207,10 @@ module.exports = {
         "no-shadow": [
             "error",
             {
-                "hoist": "all"
+                "hoist": "all",
+                "builtinGlobals": false,
+                "ignoreOnInitialization": false,
+                "allow": [] // array of identifier names for which shadowing is allowed
             }
         ],
         "no-sparse-arrays": "error",
@@ -226,7 +231,8 @@ module.exports = {
             "error",
             {
                 "vars": "all",
-                "args": "none"
+                "args": "none",
+                "destructuredArrayIgnorePattern": "^_"
             }
         ],
         "no-use-before-define": "error",

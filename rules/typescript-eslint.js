@@ -1,4 +1,6 @@
-const eslintRuleSet = require("./eslint");
+const eslintRuleSet = require("./eslint.js");
+const { deepMergeObjects } = require("../utils/merge.js");
+
 const eslintRules = eslintRuleSet.rules;
 
 // Map of all the typescript-eslint extensions.
@@ -28,8 +30,9 @@ const extensions = new Map([
     }],
     ["no-array-constructor", null],
     ["no-dupe-class-members", null],
-    ["no-duplicate-imports", null],
-    ["no-empty-function", null],
+    ["no-empty-function", {
+        allow: ["private-constructors", "protected-constructors" /* "decoratedFunctions", "overrideMethods" */ ]
+    }],
     ["no-extra-parens", null],
     ["no-extra-semi", null],
     ["no-invalid-this", null],
@@ -60,15 +63,17 @@ const extensions = new Map([
     ["semi", null],
     ["space-before-blocks", null],
     ["space-before-function-paren", null],
-    ["space-infix-ops", null]
+//    ["space-infix-ops", null] // buggy with typescript (as of 5.27.0) -- switched off below
 ]);
 
 switchOffExtensions = new Set([
     "no-unused-vars",
     "no-invalid-this",
     "no-use-before-define",
-    "no-useless-constructor"
+    "no-useless-constructor",
+    "space-infix-ops"
 ]);
+
 
 // Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
 const extendedEslintRules = Object.entries(eslintRules).reduce((extRules, [key, value]) => {
@@ -88,13 +93,21 @@ const extendedEslintRules = Object.entries(eslintRules).reduce((extRules, [key, 
         } else {
             // If extension rule has extended options, merge with standard eslint rule options:
             if (extension !== null) {
-                value = [...value];
+                // Ensure value is array if only severity string:
+                value = Array.isArray(value) ? [...value] : [value];
                 if (Array.isArray(extension)) {
                     value.push(...extension);
                 } else if (typeof extension === "object") {
-                    value[value.length - 1] = { ...value[value.length - 1], ...extension }
+                    // If array only contains severity string, push object
+                    if (value.length === 1) {
+                        value.push(extension);
+                    // Else merge object
+                    } else {
+                        value[value.length - 1] = deepMergeObjects(value[value.length - 1], extension);
+                    }
                 } else if (typeof extension === "function") {
-                    value[value.length - 1] = { ...extension(value[value.length - 1]) };
+                    const [, ...options] = value;
+                    value[value.length - 1] = { ...extension(...options) };
                 }
             }
             // Add extension rule value with the @typescript-eslint key prefix
@@ -138,7 +151,17 @@ module.exports = {
             }
         ],
         "@typescript-eslint/await-thenable": "error",
-        "@typescript-eslint/ban-ts-comment": "error",
+        "@typescript-eslint/ban-ts-comment": [
+            "error",
+            {
+                "ts-expect-error": "allow-with-description",
+                "ts-ignore": true,
+                "ts-nocheck": true,
+                "ts-check": false,
+                "minimumDescriptionLength": 10,
+                //"descriptionFormat": "someformathere"
+            }
+        ],
         "@typescript-eslint/ban-tslint-comment": "error", // No longer use tslint - remove rules
         "@typescript-eslint/ban-types": "off", // Can be used to ban certain types
         "@typescript-eslint/consistent-indexed-object-style": ["error", "record"],
@@ -256,6 +279,7 @@ module.exports = {
                 "ignoreArrowShorthand": true
             }
         ],
+        "@typescript-eslint/no-duplicate-enum-values": "error",
         "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "off",
@@ -278,6 +302,7 @@ module.exports = {
             "error",
             {
                 checksConditionals: true,
+                checksSpreads: true,
                 checksVoidReturn: true // {
                 //     arguments: true, //Disables checking an asynchronous function passed as argument where the parameter type expects a function that returns void
                 //     attributes: true, //Disables checking an asynchronous function passed as a JSX attribute expected to be a function that returns void
@@ -291,12 +316,6 @@ module.exports = {
         "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
         "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-parameter-properties": [
-            "error",
-            {
-                "allows": ["private readonly", "private", "protected readonly"]
-            }
-        ],
         "@typescript-eslint/no-redundant-type-constituents": "error",
         "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/no-this-alias": "error",
@@ -323,6 +342,13 @@ module.exports = {
         "@typescript-eslint/no-useless-empty-export": "error",
         "@typescript-eslint/no-var-requires": "error",
         "@typescript-eslint/non-nullable-type-assertion-style": "error",
+        "@typescript-eslint/parameter-properties": [
+            "error",
+            {
+                "prefer": "class-property", // or "parameter-property"
+                "allow": ["private readonly", "private", "protected readonly"]
+            }
+        ],
         "@typescript-eslint/prefer-as-const": "error",
         "@typescript-eslint/prefer-enum-initializers": "error",
         "@typescript-eslint/prefer-for-of": "error",
