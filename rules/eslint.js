@@ -224,6 +224,12 @@ module.exports = {
                 "allowAfterThis": true
             }
         ],
+        "no-unneeded-ternary": [
+            "error",
+            {
+                "defaultAssignment": true
+            }
+        ],
         "no-unsafe-finally": "error",
         "no-unused-expressions": "error", // Switched off since it breaks support for null coalescing and optional chaining in TypeScript: https://github.com/typescript-eslint/typescript-eslint/issues/1051 - https://github.com/typescript-eslint/typescript-eslint/issues/1052
         "no-unused-labels": "error",

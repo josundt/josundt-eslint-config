@@ -1,6 +1,6 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "4.7.3",
+  "version": "4.8.3",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "main": "index.js",
   "scripts": {
@@ -27,17 +27,17 @@
     "utils/**/*.js"
   ],
   "peerDependencies": {
-    "typescript": ">=4.7.2"
+    "typescript": ">=4.8.2"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "5.27.0",
-    "@typescript-eslint/parser": "5.27.0",
-    "eslint": "8.16.0",
-    "eslint-import-resolver-typescript": "2.7.1",
+    "@typescript-eslint/eslint-plugin": "5.36.1",
+    "@typescript-eslint/parser": "5.36.1",
+    "eslint": "8.23.0",
+    "eslint-import-resolver-typescript": "3.5.0",
     "eslint-plugin-deprecation": "1.3.2",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jasmine": "4.1.3",
-    "eslint-plugin-jsdoc": "39.3.2",
-    "eslint-plugin-unicorn": "42.0.0"
+    "eslint-plugin-jsdoc": "39.3.6",
+    "eslint-plugin-unicorn": "43.0.2"
   }
 }

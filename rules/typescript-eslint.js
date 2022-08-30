@@ -164,6 +164,7 @@ module.exports = {
         ],
         "@typescript-eslint/ban-tslint-comment": "error", // No longer use tslint - remove rules
         "@typescript-eslint/ban-types": "off", // Can be used to ban certain types
+        "@typescript-eslint/consistent-generic-constructors": ["off", "constructor"],
         "@typescript-eslint/consistent-indexed-object-style": ["error", "record"],
         "@typescript-eslint/consistent-type-assertions": [
             "error",
@@ -349,15 +350,21 @@ module.exports = {
                 "allow": ["private readonly", "private", "protected readonly"]
             }
         ],
-        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/prefer-as-const": "off",
         "@typescript-eslint/prefer-enum-initializers": "error",
         "@typescript-eslint/prefer-for-of": "error",
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/prefer-includes": "error",
         "@typescript-eslint/prefer-literal-enum-member": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
-        "@typescript-eslint/prefer-nullish-coalescing": "error",
-        "@typescript-eslint/prefer-optional-chain": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": [
+            "error",
+            {
+                "ignoreConditionalTests": true,
+                "ignoreTernaryTests": true,
+                "ignoreMixedLogicalExpressions": true
+            }
+        ],        "@typescript-eslint/prefer-optional-chain": "error",
         "@typescript-eslint/prefer-readonly": "error",
         "@typescript-eslint/prefer-readonly-parameter-types": "off", // Could be useful but requires too much work and verbose notation
         "@typescript-eslint/prefer-reduce-type-parameter": "error",
