@@ -4,62 +4,24 @@ module.exports = {
     ],
     "rules": {
         "arrow-body-style": "error",
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-spacing": [
-            "error",
-            {
-                "before": true,
-                "after": true
-            }
-        ],
-        "brace-style": [
-            "error",
-            "1tbs"
-        ],
-        "camelcase": "off",
-        "capitalized-comments": [
-            "off",
-            "always"
-        ],
-        "class-methods-use-this": "off",
-        "comma-dangle": "off",
-        "comma-spacing": [
-            "error",
-            {
-                "before": false,
-                "after": true
-            }
-        ],
-        "complexity": [
-            "off",
-            {
-                "max": 20
-            }
-        ],
-        "constructor-super": "error",
+        "arrow-parens": ["error", "as-needed"],
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "brace-style": ["error", "1tbs"],
+        "class-methods-use-this": "off", // Warn when methods could be static
+        "comma-spacing": ["error", {"before": false, "after": true }],
+        "comma-style": ["error", "last"],
+        "computed-property-spacing": ["error", "never"],
+        "complexity": ["warn", { "max": 20 }],
         "curly": "error",
-        "default-case": "off",
+        "default-case-last": "error",
         "default-param-last": "error",
-        "dot-notation": [
-            "off",
-            {
-                "before": false,
-                "after": true
-            }
-        ],
-        "eol-last": "off",
-        "eqeqeq": [
-            "error",
-            "always"
-        ],
-        "func-call-spacing": [
-            "error",
-            "never"
-        ],
+        "dot-location": ["error", "property"],
+        "eqeqeq": ["error", "always"],
+        "func-call-spacing": ["error", "never"],
+        "function-call-argument-newline": ["warn", "consistent"],
+        "function-paren-newline": ["warn", "multiline-arguments"],
         "guard-for-in": "error",
+        "grouped-accessor-pairs": "error",
         "handle-callback-err": "error",
         "id-denylist": [
             "error",
@@ -96,23 +58,13 @@ module.exports = {
                 ]
             }
         ],
-        "init-declarations": "off",
+        "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "strict" }],
         "keyword-spacing": "error",
-        "linebreak-style": [
-            "off",
-            "windows"
-        ],
-        "lines-between-class-members": [
-            "off",
-            "always",
-            {
-                "exceptAfterSingleLine": true
-            }
-        ],
-        "max-classes-per-file": [
-            "off",
-            5
-        ],
+        "max-classes-per-file": ["off", 5],
+        "max-depth": ["warn", { "max": 5 }], // default 4
+        "max-params": ["off", { "max": 6 }], // default 3 - SWITCHED OFF - does not work well with constructor injection
+        "max-statements-per-line": ["warn", { "max": 1 }], // default 1
+        "max-statements": ["warn", { "max": 100 }], // default 50
         "max-len": [
             "warn",
             {
@@ -120,52 +72,32 @@ module.exports = {
                 "code": 180
             }
         ],
-        "max-lines": [
-            "off",
-            2000
-        ],
+        "max-lines": ["off", 2000],
         "new-parens": "error",
-        "newline-per-chained-call": "off",
         "no-array-constructor": "error",
         "no-bitwise": "error",
         "no-caller": "error",
-        "no-cond-assign": [
-            "error"
-        ],
         "no-console": "error",
-        "no-constant-condition": "error",
-        "no-control-regex": "error",
-        "no-debugger": "error",
-        "no-dupe-class-members": "error",
-        "no-duplicate-case": "error",
+        "no-constant-binary-expression": "error",
         "no-duplicate-imports": "error",
-        "no-empty": "error",
-        "no-empty-character-class": "error",
         "no-empty-function": ["error", {
             //allow: [/*"functions", "arrowFunctions", "generatorFunctions", "methods", "generatorMethods", "getters", "setters", "constructors", "asyncFunctions", "asyncMethods"*/]
         }],
+        "no-empty-static-block": "error",
         "no-eval": "error",
-        "no-ex-assign": "error",
         "no-extra-bind": "error",
-        "no-extra-boolean-cast": "error",
-        "no-extra-parens": "off",
-        "no-extra-semi": "error",
-        "no-fallthrough": "off",
+        "no-implicit-coercion": ["error", { "allow": ["!!"] }],
         "no-implied-eval": "error",
-        "no-inner-declarations": "off",
-        "no-invalid-regexp": "error",
+        "no-inner-declarations": "off", // Switched off from recommended rules, gave too many issues
         "no-invalid-this": "error",
-        "no-irregular-whitespace": "error",
-        "no-loss-of-precision": "error",
-        "no-magic-numbers": "off",
+        "no-multi-spaces": "warn",
         "no-multi-str": "error",
+        "no-lone-blocks": "error",
+        "no-lonely-if": "error",
         "no-multiple-empty-lines": "warn",
         "no-new-func": "error",
         "no-new-wrappers": "error",
-        "no-octal": "error",
         "no-octal-escape": "error",
-        "no-redeclare": "error",
-        "no-regex-spaces": "error",
         "no-restricted-syntax": [
             "off", // Below - rules to require Async suffix on async methods - not good enough
             // {
@@ -213,26 +145,18 @@ module.exports = {
                 "allow": [] // array of identifier names for which shadowing is allowed
             }
         ],
-        "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",
         "no-throw-literal": "error",
         "no-trailing-spaces": "warn",
         "no-undef-init": "error",
-        "no-underscore-dangle": [
-            "off",
-            {
-                "allowAfterThis": true
-            }
-        ],
         "no-unneeded-ternary": [
             "error",
             {
                 "defaultAssignment": true
             }
         ],
-        "no-unsafe-finally": "error",
-        "no-unused-expressions": "error", // Switched off since it breaks support for null coalescing and optional chaining in TypeScript: https://github.com/typescript-eslint/typescript-eslint/issues/1051 - https://github.com/typescript-eslint/typescript-eslint/issues/1052
-        "no-unused-labels": "error",
+        "no-unused-expressions": "error",
+        "no-unused-private-class-members": "error",
         "no-unused-vars": [
             "error",
             {
@@ -245,7 +169,10 @@ module.exports = {
         "no-useless-constructor": "error",
         "no-var": "error",
         "no-void": "error",
+        "no-warning-comments": ["warn", { "terms": ["todo"] }],
+        "object-curly-newline": ["warn", { "consistent": true }],
         "object-curly-spacing": ["error", "always"],
+        "object-property-newline": ["warn", { "allowAllPropertiesOnSameLine": true }],
         "object-shorthand": [
             "error",
             "never"
@@ -269,7 +196,9 @@ module.exports = {
         ],
         "prefer-arrow-callback": "error",
         "prefer-const": "error",
+        "prefer-exponentiation-operator": "error",
         "prefer-object-spread": "error",
+        "prefer-promise-reject-errors": "error",
         "prefer-template": "error",
         "quotes": [
             "error",
@@ -281,17 +210,21 @@ module.exports = {
         ],
         "radix": "error",
         "require-await": "error",
+        "require-unicode-regexp": "error",
+        "rest-spread-spacing": ["error", "never"],
         "return-await": "error",
         "semi": [
             "error",
             "always"
         ],
+        "semi-spacing": ["error", {"before": false, "after": true}],
+        "semi-style": ["error", "last"],
         "space-before-blocks": [
-            "error",
+            "warn",
             "always"
         ],
         "space-before-function-paren": [
-            "error",
+            "warn",
             {
                 "anonymous": "always",
                 "asyncArrow": "always",
@@ -299,13 +232,13 @@ module.exports = {
             }
         ],
         "space-in-parens": [
-            "error",
+            "warn",
             "never"
         ],
-        "space-infix-ops": "error",
-        "spaced-comment": "off",
-        "use-isnan": "error",
-        "valid-typeof": "error",
+        "space-infix-ops": "warn",
+        "switch-colon-spacing": ["error", {"after": true, "before": false}],
+        "template-curly-spacing": ["error", "never"],
+        "unicode-bom": ["error", "never"],
         "yoda": "error"
     }
 };

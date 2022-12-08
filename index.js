@@ -1,1 +1,1 @@
-module.exports = require("./typescript-web-jasmine");
+module.exports = require("./typescript-web-jest");

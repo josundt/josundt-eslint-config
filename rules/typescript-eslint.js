@@ -364,7 +364,8 @@ module.exports = {
                 "ignoreTernaryTests": true,
                 "ignoreMixedLogicalExpressions": true
             }
-        ],        "@typescript-eslint/prefer-optional-chain": "error",
+        ],
+        "@typescript-eslint/prefer-optional-chain": "error",
         "@typescript-eslint/prefer-readonly": "error",
         "@typescript-eslint/prefer-readonly-parameter-types": "off", // Could be useful but requires too much work and verbose notation
         "@typescript-eslint/prefer-reduce-type-parameter": "error",
