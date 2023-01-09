@@ -1,6 +1,6 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "4.9.6",
+  "version": "4.9.7",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "main": "index.js",
   "scripts": {
