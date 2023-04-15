@@ -195,6 +195,7 @@ const rules = {
     "no-non-null-assertion": "off",
     "no-redundant-type-constituents": "error",
     "no-require-imports": "error",
+    "no-unsafe-enum-comparison": "error",
     "no-this-alias": "error",
     "no-throw-literal": [
         "error",
