@@ -1,9 +1,13 @@
 module.exports = {
     "env": {
-        "es6": true
+        "node": true,
+        "es6": true,
+        "jest": true,
+        "jasmine": true
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
+        "ecmaVersion": 2021,
         "project": "tsconfig.json",
         "sourceType": "module"
     },
@@ -11,7 +15,7 @@ module.exports = {
         "./rules/deprecation.js",
         // "./rules/eslint.js",  -> commented out since "typescript-eslint" rules inherit from this
         "./rules/eslint-comments.js",
-        "./rules/import-typescript.js",
+        "./rules/import-typescript-node.js",
         "./rules/jsdoc-typescript.js",
         "./rules/typescript-eslint.js",
         "./rules/unicorn.js",
