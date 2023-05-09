@@ -1,16 +1,16 @@
 const { typescriptEslintRules } = require("./typescript-eslint/rules.js");
-const { typescriptEslintExtensionrules } = require("./typescript-eslint/extensionrules.js");
+const {
+    typescriptEslintExtensionrules
+} = require("./typescript-eslint/extensionrules.js");
 
 module.exports = {
-    "extends": [
+    extends: [
         "./eslint",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
-    "plugins": [
-        "@typescript-eslint/eslint-plugin"
-    ],
-    "rules": {
+    plugins: ["@typescript-eslint/eslint-plugin"],
+    rules: {
         ...typescriptEslintRules,
         ...typescriptEslintExtensionrules
     }

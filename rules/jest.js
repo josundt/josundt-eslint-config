@@ -1,14 +1,10 @@
 module.exports = {
-    "extends": [
-        "plugin:jest/recommended"
-    ],
-    "env": {
+    extends: ["plugin:jest/recommended"],
+    env: {
         "jest/globals": true
     },
-    "plugins": [
-        "jest"
-    ],
-    "rules": {
+    plugins: ["jest"],
+    rules: {
         "jest/unbound-method": "error"
     }
 };

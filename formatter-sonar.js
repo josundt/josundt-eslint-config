@@ -2,10 +2,10 @@
 // https://medium.com/@jose_82797/how-to-import-eslint-issues-into-sonarqube-overview-analysis-in-a-frontend-application-b8e8946b8104
 // https://eslint.org/docs/latest/developer-guide/working-with-custom-formatters#working-with-custom-formatters
 
-module.exports = function(results) {
-    var summary = {issues: []};
-    results.forEach(function(result) {
-        result.messages.forEach(function(msg) {
+module.exports = function (results) {
+    var summary = { issues: [] };
+    results.forEach(function (result) {
+        result.messages.forEach(function (msg) {
             var logMessage = {
                 engineId: "eslint",
                 ruleId: msg.ruleId,
@@ -15,9 +15,9 @@ module.exports = function(results) {
                     textRange: {
                         startLine: msg.line,
                         endLine: msg.endLine,
-                        endColumn: msg.endColumn
-                    }
-                }
+                        endColumn: msg.endColumn,
+                    },
+                },
             };
 
             // The log message type and severity is up to you but you need to take in consideration SonarQube properties
@@ -27,7 +27,7 @@ module.exports = function(results) {
             }
             if (msg.severity === 2) {
                 logMessage.type = "BUG";
-                logMessage.severity="MAJOR";
+                logMessage.severity = "MAJOR";
             }
             summary.issues.push(logMessage);
         });

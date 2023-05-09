@@ -1,15 +1,16 @@
 # @josundt/eslint-config #
 
-ESLint ruleset including required ESLint plugins for josundt TypeScript projects
+ESLint ruleset including required ESLint plugins for jorundt TypeScript projects
 
 ## Usage ##
+1. Make sure you have installed and configured `@josundt/prettier-config` first
 
-1. Install this package
+2. Install this package
     ```bash
     npm install @josundt/eslint-config
     ```
 
-2. Create an `.eslintrc` file in the root directory of your project with the following content:
+3. Create an `.eslintrc` file in the root directory of your project with the following content:
     ```javascript
     {
         "extends": ["@josundt"]
@@ -25,7 +26,7 @@ ESLint ruleset including required ESLint plugins for josundt TypeScript projects
     * `["@josundt/eslint-config/typescript-node"]` (same as default; but without __browser__ environment and __jasmine__ linting support) .
 
 
-3. Add `lint:ts` script to your project's package.json file:
+4. Add `lint:ts` script to your project's package.json file:
     ```javascript
     {
         // ...
@@ -38,12 +39,12 @@ ESLint ruleset including required ESLint plugins for josundt TypeScript projects
     }
     ```
 
-4. Test the script:
+5. Test the script:
     ```bash
     npm run lint:ts
     ```
 
-5. Live Code Analysis in Visual Studio Code:
+6. Live Code Analysis in Visual Studio Code:
     - Add a `.eslintignore` file in the root directory of your project with the following content:
         ```text
         # Ignore js files; only analyze typescript files:

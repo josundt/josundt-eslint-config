@@ -1,8 +1,6 @@
 module.exports = {
-    "plugins": [
-        "deprecation"
-    ],
-    "rules": {
+    plugins: ["deprecation"],
+    rules: {
         "deprecation/deprecation": "error"
     }
 };

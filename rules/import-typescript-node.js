@@ -1,12 +1,9 @@
 module.exports = {
-    "extends": [
-        "plugin:import/typescript"
-    ],
-    "plugins": [
-        "import"
-    ],
-    "rules": {
-        "import/extensions": [ // Ensure all local .ts file imports use .js extension
+    extends: ["plugin:import/typescript"],
+    plugins: ["import"],
+    rules: {
+        "import/extensions": [
+            // Ensure all local .ts file imports use .js extension
             "error",
             "ignorePackages"
         ],

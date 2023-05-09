@@ -4,8 +4,8 @@ const rules = {
     "array-type": [
         "error",
         {
-            "default": "array-simple",
-            "readonly": "array-simple"
+            default: "array-simple",
+            readonly: "array-simple"
         }
     ],
     "await-thenable": "error",
@@ -16,7 +16,7 @@ const rules = {
             "ts-ignore": true,
             "ts-nocheck": true,
             "ts-check": false,
-            "minimumDescriptionLength": 10,
+            "minimumDescriptionLength": 10
             //"descriptionFormat": "someformathere"
         }
     ],
@@ -28,66 +28,64 @@ const rules = {
     "consistent-type-assertions": [
         "error",
         {
-            "assertionStyle": "as",
-            "objectLiteralTypeAssertions": "allow"
+            assertionStyle: "as",
+            objectLiteralTypeAssertions: "allow"
         }
     ],
-    "consistent-type-definitions": [
-        "error",
-        "interface"
-    ],
+    "consistent-type-definitions": ["error", "interface"],
     "consistent-type-exports": [
         "error",
         {
-            "fixMixedExportsWithInlineTypeSpecifier": true
+            fixMixedExportsWithInlineTypeSpecifier: true
         }
     ],
     "consistent-type-imports": [
         "error",
         {
-            "prefer": "type-imports",
-            "fixStyle": "inline-type-imports",
-            "disallowTypeAnnotations": false
+            prefer: "type-imports",
+            fixStyle: "inline-type-imports",
+            disallowTypeAnnotations: false
         }
     ],
     "explicit-function-return-type": [
         "error",
         {
-            "allowConciseArrowFunctionExpressionsStartingWithVoid": true,
-            "allowExpressions": true,
-            "allowFunctionsWithoutTypeParameters": false,
-            "allowHigherOrderFunctions": true,
-            "allowIIFEs": false,
-            "allowTypedFunctionExpressions": true,
-            "allowedNames": []
+            allowConciseArrowFunctionExpressionsStartingWithVoid: true,
+            allowExpressions: true,
+            allowFunctionsWithoutTypeParameters: false,
+            allowHigherOrderFunctions: true,
+            allowIIFEs: false,
+            allowTypedFunctionExpressions: true,
+            allowedNames: []
         }
     ],
     "explicit-member-accessibility": [
         "error",
         {
-            "accessibility": "no-public"
+            accessibility: "no-public"
         }
     ],
-    "explicit-module-boundary-types": [ // same as "recommended" except error instead of warning
+    "explicit-module-boundary-types": [
+        // same as "recommended" except error instead of warning
         "error",
         {
-            "allowArgumentsExplicitlyTypedAsAny": false,
-            "allowDirectConstAssertionInArrowFunctions": true,
-            "allowHigherOrderFunctions": true,
-            "allowTypedFunctionExpressions": true,
-            "allowedNames": []
+            allowArgumentsExplicitlyTypedAsAny: false,
+            allowDirectConstAssertionInArrowFunctions: true,
+            allowHigherOrderFunctions: true,
+            allowTypedFunctionExpressions: true,
+            allowedNames: []
         }
     ],
     "member-delimiter-style": [
         "error",
         {
-            "multiline": {
-                "delimiter": "semi",
-                "requireLast": true
+            multiline: {
+                delimiter: "semi",
+                requireLast: true
             },
-            "singleline": {
-                "delimiter": "semi",
-                "requireLast": true
+            singleline: {
+                delimiter: "semi",
+                requireLast: false
             }
         }
     ],
@@ -96,49 +94,38 @@ const rules = {
     "naming-convention": [
         "error",
         {
-            "selector": "default",
-            "format": [
-                "camelCase"
-            ],
-            "leadingUnderscore": "forbid",
-            "trailingUnderscore": "forbid"
+            selector: "default",
+            format: ["camelCase"],
+            leadingUnderscore: "forbid",
+            trailingUnderscore: "forbid"
         },
         {
-            "selector": "typeLike",
-            "format": [
-                "PascalCase"
-            ]
+            selector: "typeLike",
+            format: ["PascalCase"]
         },
         {
-            "selector": "method",
-            "modifiers": [
+            selector: "method",
+            modifiers: [
                 // "#private", // Did not work even if it was added in 5.49.0
                 "private"
             ],
-            "format": [
-                "camelCase"
-            ],
-            "leadingUnderscore": "allow",
-            "trailingUnderscore": "forbid"
+            format: ["camelCase"],
+            leadingUnderscore: "allow",
+            trailingUnderscore: "forbid"
         },
         {
-            "selector": "property",
-            "modifiers": [
+            selector: "property",
+            modifiers: [
                 // "#private", // Did not work even if it was added in 5.49.0
                 "private"
             ],
-            "format": [
-                "camelCase"
-            ],
-            "leadingUnderscore": "allow",
-            "trailingUnderscore": "forbid"
+            format: ["camelCase"],
+            leadingUnderscore: "allow",
+            trailingUnderscore: "forbid"
         },
         {
-            "selector": "enumMember",
-            "format": [
-                "camelCase",
-                "PascalCase"
-            ]
+            selector: "enumMember",
+            format: ["camelCase", "PascalCase"]
         }
     ],
     "no-base-to-string": "error",
@@ -146,7 +133,7 @@ const rules = {
     "no-confusing-void-expression": [
         "error",
         {
-            "ignoreArrowShorthand": true
+            ignoreArrowShorthand: true
         }
     ],
     "no-duplicate-enum-values": "error",
@@ -156,7 +143,7 @@ const rules = {
     "no-explicit-any": [
         "off",
         {
-            "ignoreRestArgs": "false"
+            ignoreRestArgs: "false"
         }
     ],
     "no-extra-non-null-assertion": "error",
@@ -168,8 +155,8 @@ const rules = {
     "no-invalid-void-type": [
         "error",
         {
-            "allowInGenericTypeArguments": true,
-            "allowAsThisParameter": true
+            allowInGenericTypeArguments: true,
+            allowAsThisParameter: true
         }
     ],
     "no-meaningless-void-operator": "error",
@@ -177,9 +164,9 @@ const rules = {
     "no-misused-promises": [
         "error",
         {
-            "checksConditionals": true,
-            "checksSpreads": true,
-            "checksVoidReturn": true // {
+            checksConditionals: true,
+            checksSpreads: true,
+            checksVoidReturn: true // {
             //     arguments: true, //Disables checking an asynchronous function passed as argument where the parameter type expects a function that returns void
             //     attributes: true, //Disables checking an asynchronous function passed as a JSX attribute expected to be a function that returns void
             //     properties: true, //Disables checking an asynchronous function passed as an object property expected to be a function that returns void
@@ -200,8 +187,8 @@ const rules = {
     "no-throw-literal": [
         "error",
         {
-            "allowThrowingAny": false, // Default is to allow throwing values of type any
-            "allowThrowingUnknown": true // Default is to allow throwing values of type unknown
+            allowThrowingAny: false, // Default is to allow throwing values of type any
+            allowThrowingUnknown: true // Default is to allow throwing values of type unknown
         }
     ],
     "no-type-alias": "off",
@@ -223,8 +210,8 @@ const rules = {
     "parameter-properties": [
         "error",
         {
-            "prefer": "class-property", // or "parameter-property"
-            "allow": ["private readonly", "private", "protected readonly"]
+            prefer: "class-property", // or "parameter-property"
+            allow: ["private readonly", "private", "protected readonly"]
         }
     ],
     "prefer-as-const": "off",
@@ -237,9 +224,9 @@ const rules = {
     "prefer-nullish-coalescing": [
         "error",
         {
-            "ignoreConditionalTests": true,
-            "ignoreTernaryTests": true,
-            "ignoreMixedLogicalExpressions": true
+            ignoreConditionalTests: true,
+            ignoreTernaryTests: true,
+            ignoreMixedLogicalExpressions: true
         }
     ],
     "prefer-optional-chain": "error",
@@ -255,32 +242,32 @@ const rules = {
     "restrict-plus-operands": [
         "error",
         {
-            "checkCompoundAssignments": true,
-            "allowAny": false
+            checkCompoundAssignments: true,
+            allowAny: false
         }
     ],
     "restrict-template-expressions": [
         "error",
         {
-            "allowAny": false,
-            "allowBoolean": false,
-            "allowNever": false,
-            "allowNullish": false,
-            "allowNumber": true,
-            "allowRegExp": false
+            allowAny: false,
+            allowBoolean: false,
+            allowNever: false,
+            allowNullish: false,
+            allowNumber: true,
+            allowRegExp: false
         }
     ],
     "sort-type-constituents": "off",
     "strict-boolean-expressions": [
         "off",
         {
-            "allowString": true,
-            "allowNumber": true,
-            "allowNullableObject": true,
-            "allowNullableString": true,
-            "allowNullableNumber": true,
-            "allowNullableBoolean": true,
-            "allowAny": false
+            allowString: true,
+            allowNumber: true,
+            allowNullableObject: true,
+            allowNullableString: true,
+            allowNullableNumber: true,
+            allowNullableBoolean: true,
+            allowAny: false
         }
     ],
     "switch-exhaustiveness-check": "error",
@@ -289,21 +276,24 @@ const rules = {
     "typedef": [
         "error",
         {
-            "arrayDestructuring": false,
-            "arrowParameter": false,
-            "memberVariableDeclaration": true,
-            "objectDestructuring": false,
-            "parameter": true,
-            "propertyDeclaration": true,
-            "variableDeclaration": false
+            arrayDestructuring: false,
+            arrowParameter: false,
+            memberVariableDeclaration: true,
+            objectDestructuring: false,
+            parameter: true,
+            propertyDeclaration: true,
+            variableDeclaration: false
         }
     ],
     "unbound-method": "error",
-    "unified-signatures": "off",
+    "unified-signatures": "off"
 };
 
 // Rules - append "@typescript-eslint/" to rule names
-module.exports.typescriptEslintRules = Object.entries(rules).reduce((aggr, [key, value]) => ({
-    ...aggr,
-    [`@typescript-eslint/${key}`]: value
-}), {});
+module.exports.typescriptEslintRules = Object.entries(rules).reduce(
+    (aggr, [key, value]) => ({
+        ...aggr,
+        [`@typescript-eslint/${key}`]: value
+    }),
+    {}
+);

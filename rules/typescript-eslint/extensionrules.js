@@ -15,53 +15,34 @@ const eslintRules = eslintRuleSet.rules;
 //     The standard eslint options object will be passed as parameters, the return statement will be added as options.
 
 const extensions = new Map([
-
-    // ================== Formatting rules ==================
-
-    ["block-spacing", true],
-    ["brace-style", true],
-    ["camelcase", false],
-    ["comma-dangle", true],
-    ["comma-spacing", true],
-    ["func-call-spacing", true],
-    ["indent", true],
-    ["key-spacing", true],
-    ["keyword-spacing", true],
-    ["lines-arround-comment", true],
-    ["lines-between-class-members", true],
-    ["member-delimiter-style", true],
-    ["no-extra-parens", true],
-    ["object-curly-spacing", true],
-    ["padding-line-between-statements", [
-        { "blankLine": "always", "prev": "*", "next": ["interface", "type"] },
-        { "blankLine": "always", "prev": ["interface", "type"], "next": "*" }
-    ]],
-    ["quotes", true],
-    ["semi", true],
-    ["space-before-blocks", true],
-    ["space-before-function-paren", true],
-    ["space-infix-ops", false],
-//    ["space-infix-ops", true] // buggy with typescript (as of 5.27.0) -- switched off below
-
-
-    // =================== Other rules ===================
-
     ["default-param-last", true],
-    ["dot-notation", {
-        "allowPrivateClassPropertyAccess": false,
-        "allowProtectedClassPropertyAccess": false,
-        "allowIndexSignaturePropertyAccess": false
-    }],
+    [
+        "dot-notation",
+        {
+            allowPrivateClassPropertyAccess: false,
+            allowProtectedClassPropertyAccess: false,
+            allowIndexSignaturePropertyAccess: false
+        }
+    ],
     ["init-declarations", true],
-    ["lines-between-class-members", {
-        "exceptAfterOverload": true
-    }],
+    [
+        "lines-between-class-members",
+        {
+            exceptAfterOverload: true
+        }
+    ],
     ["no-array-constructor", true],
     ["no-dupe-class-members", true],
     ["no-duplicate-imports", true],
-    ["no-empty-function", {
-        allow: ["private-constructors", "protected-constructors" /* "decoratedFunctions", "overrideMethods" */ ]
-    }],
+    [
+        "no-empty-function",
+        {
+            allow: [
+                "private-constructors",
+                "protected-constructors" /* "decoratedFunctions", "overrideMethods" */
+            ]
+        }
+    ],
     ["no-extra-semi", true],
     ["no-implied-eval", true],
     ["no-invalid-this", false],
@@ -70,22 +51,25 @@ const extensions = new Map([
     ["no-magic-numbers", true],
     ["no-redeclare", true],
     ["no-restricted-imports", true],
-    ["no-shadow", v => {
-        const o = {
-            ...v,
-            "ignoreTypeValueShadow": true,
-            "ignoreFunctionTypeParameterNameValueShadow": true
-        };
-        delete o["ignoreOnInitialization"]; // Temporary bug in @typescript/eslint "no-shadow" extension rule - "ignoreOnInitialization" property considered invalid
-        return o;
-    }],
+    [
+        "no-shadow",
+        v => {
+            const o = {
+                ...v,
+                ignoreTypeValueShadow: true,
+                ignoreFunctionTypeParameterNameValueShadow: true
+            };
+            delete o["ignoreOnInitialization"]; // Temporary bug in @typescript/eslint "no-shadow" extension rule - "ignoreOnInitialization" property considered invalid
+            return o;
+        }
+    ],
     ["no-throw-literal", true],
     ["no-unused-expressions", true],
     ["no-unused-vars", false],
     ["no-use-before-define", false],
     ["no-useless-constructor", false],
     ["require-await", true],
-    ["return-await", true],
+    ["return-await", true]
 ]);
 
 // console.log(extensionRules);
@@ -93,14 +77,14 @@ const extensions = new Map([
 // console.log("Not converted:", Array.from(extensions.keys()).filter(k => !Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).includes(k)));
 
 // Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
-module.exports.typescriptEslintExtensionrules = Object.entries(eslintRules).reduce((extRules, [key, value]) => {
-
+module.exports.typescriptEslintExtensionrules = Object.entries(
+    eslintRules
+).reduce((extRules, [key, value]) => {
     // Try to get from known extensions map
     const extension = extensions.get(key);
 
     // If found in known typescript eslint extension rules map
     if (extension !== undefined) {
-
         // Switch off standard eslint rule
         extRules[key] = "off";
 
@@ -118,9 +102,12 @@ module.exports.typescriptEslintExtensionrules = Object.entries(eslintRules).redu
                     // If array only contains severity string, push object
                     if (value.length === 1) {
                         value.push(extension);
-                    // Else merge object
+                        // Else merge object
                     } else {
-                        value[value.length - 1] = deepMergeObjects(value[value.length - 1], extension);
+                        value[value.length - 1] = deepMergeObjects(
+                            value[value.length - 1],
+                            extension
+                        );
                     }
                 } else if (typeof extension === "function") {
                     const [, ...options] = value;
@@ -130,8 +117,6 @@ module.exports.typescriptEslintExtensionrules = Object.entries(eslintRules).redu
             // Add extension rule value with the @typescript-eslint key prefix
             extRules[`@typescript-eslint/${key}`] = value;
         }
-
-
     }
     // else: if no extension rule exists, the standard eslint rule will be used through the "extends" configuration below
 
