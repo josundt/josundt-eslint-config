@@ -7,6 +7,8 @@ module.exports = {
     rules: {
         "jasmine/no-suite-dupes": ["error", "branch"],
         "jasmine/no-spec-dupes": ["error", "branch"],
-        "jasmine/no-describe-variables": "error"
+        "jasmine/no-describe-variables": "error",
+        "jasmine/new-line-between-declarations": "off", // formatting rule conflicting with formatters (e.g. prettier)
+        "jasmine/new-line-before-expect": "off" // formatting rule conflicting with formatters (e.g. prettier)
     }
 };
