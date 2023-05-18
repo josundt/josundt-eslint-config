@@ -146,7 +146,10 @@ module.exports = {
         "object-shorthand": ["error", "never"],
         "one-var": ["error", "never"],
         "prefer-arrow-callback": "error",
-        "prefer-const": "error",
+        "prefer-const": [
+            "error",
+            { destructuring: "all", ignoreReadBeforeAssign: false }
+        ],
         "prefer-exponentiation-operator": "error",
         "prefer-object-spread": "error",
         "prefer-promise-reject-errors": "error",

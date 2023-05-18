@@ -15,9 +15,9 @@ module.exports = function (results) {
                     textRange: {
                         startLine: msg.line,
                         endLine: msg.endLine,
-                        endColumn: msg.endColumn,
-                    },
-                },
+                        endColumn: msg.endColumn
+                    }
+                }
             };
 
             // The log message type and severity is up to you but you need to take in consideration SonarQube properties
