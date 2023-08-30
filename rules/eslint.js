@@ -3,7 +3,7 @@ module.exports = {
     rules: {
         "arrow-body-style": "error",
         "arrow-parens": ["error", "as-needed"],
-        "class-methods-use-this": "off", // Warn when methods could be static
+        "class-methods-use-this": ["off", { enforceForClassFields: true }], // Warn when methods could be static
         "complexity": ["warn", { max: 20 }],
         "curly": "error",
         "default-case-last": "error",

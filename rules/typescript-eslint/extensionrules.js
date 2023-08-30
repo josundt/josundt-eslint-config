@@ -5,8 +5,8 @@ const eslintRules = eslintRuleSet.rules;
 
 // Map of all the typescript-eslint extensions.
 // If extension rule has additional properties compared to standard eslint rule:
-// If the map value is null:
-//     The options from the standard rule will be used as is.
+// If the map value is a boolean:
+//     If true the options from the standard rule will be used as is; if false the rule will be switched off.
 // If the map value is an object:
 //     The object will be merged merged with standard rule (rule object 1).
 // If the map value is an array:
@@ -15,6 +15,14 @@ const eslintRules = eslintRuleSet.rules;
 //     The standard eslint options object will be passed as parameters, the return statement will be added as options.
 
 const extensions = new Map([
+    [
+        "class-methods-use-this",
+        false
+        // {
+        //     ignoreOverrideMethods: false,
+        //     ignoreClassesThatImplementAnInterface: false
+        // }
+    ],
     ["default-param-last", true],
     [
         "dot-notation",
@@ -33,7 +41,7 @@ const extensions = new Map([
     ],
     ["no-array-constructor", true],
     ["no-dupe-class-members", true],
-    ["no-duplicate-imports", true],
+    ["no-duplicate-imports", false], // typescript-eslint 5.25.0: deprecated in favour of import/no-duplicates
     [
         "no-empty-function",
         {

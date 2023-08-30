@@ -21,7 +21,12 @@ const rules = {
         }
     ],
     "ban-tslint-comment": "error", // No longer use tslint - remove rules
-    "ban-types": "off", // Can be used to ban certain types
+    "ban-types": [
+        "error",
+        {
+            // Enable additional/disable default disabled types here
+        }
+    ],
     "class-literal-property-style": "off",
     "consistent-generic-constructors": ["off", "constructor"],
     "consistent-indexed-object-style": ["error", "record"],
@@ -191,7 +196,6 @@ const rules = {
             allowThrowingUnknown: true // Default is to allow throwing values of type unknown
         }
     ],
-    "no-type-alias": "off",
     "no-unnecessary-boolean-literal-compare": "error",
     "no-unnecessary-condition": "off", // allow runtime null checks etc even if reported not necessary by type system
     "no-unnecessary-qualifier": "error",
@@ -226,7 +230,13 @@ const rules = {
         {
             ignoreConditionalTests: true,
             ignoreTernaryTests: true,
-            ignoreMixedLogicalExpressions: true
+            ignoreMixedLogicalExpressions: true,
+            ignorePrimitives: {
+                string: false,
+                number: false,
+                bigint: false,
+                boolean: false
+            }
         }
     ],
     "prefer-optional-chain": "error",
@@ -238,11 +248,16 @@ const rules = {
     "prefer-string-starts-ends-with": "error",
     "prefer-ts-expect-error": "error",
     "promise-function-async": "off",
-    "require-array-sort-compare": "error",
+    "require-array-sort-compare": [
+        "error",
+        {
+            ignoreStringArrays: false
+        }
+    ],
     "restrict-plus-operands": [
         "error",
         {
-            checkCompoundAssignments: true,
+            skipCompoundAssignments: false,
             allowAny: false
         }
     ],
