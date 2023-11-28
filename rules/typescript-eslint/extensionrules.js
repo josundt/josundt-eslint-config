@@ -10,7 +10,7 @@ const eslintRules = eslintRuleSet.rules;
 // If the map value is an object:
 //     The object will be merged merged with standard rule (rule object 1).
 // If the map value is an array:
-//     The items of the array will be added as a new rule options object.
+//     The options items of the array (expected to be object literals or undefined) will be merged with the options items of the standard rule (expected to be object literals or undefined).
 // If the map value is a function:
 //     The standard eslint options object will be passed as parameters, the return statement will be added as options.
 
@@ -76,6 +76,10 @@ const extensions = new Map([
     ["no-unused-vars", false],
     ["no-use-before-define", false],
     ["no-useless-constructor", false],
+    [
+        "prefer-destructuring",
+        [{}, { enforceForDeclarationWithTypeAnnotation: false }]
+    ],
     ["require-await", true],
     ["return-await", true]
 ]);
@@ -105,7 +109,19 @@ module.exports.typescriptEslintExtensionrules = Object.entries(
                 // Ensure value is array if only severity string:
                 value = Array.isArray(value) ? [...value] : [value];
                 if (Array.isArray(extension)) {
-                    value.push(...extension);
+                    const [severity, ...orgOpts] = value;
+                    const extOpts = extension;
+                    value = [severity];
+                    for (
+                        let i = 0;
+                        i < Math.max(orgOpts.length, extOpts.length);
+                        i++
+                    ) {
+                        value.push({
+                            ...(orgOpts[i] ?? {}),
+                            ...(extOpts[i] ?? {})
+                        });
+                    }
                 } else if (typeof extension === "object") {
                     // If array only contains severity string, push object
                     if (value.length === 1) {

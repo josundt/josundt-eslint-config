@@ -188,6 +188,7 @@ const rules = {
     "no-redundant-type-constituents": "error",
     "no-require-imports": "error",
     "no-unsafe-enum-comparison": "error",
+    "no-unsafe-unary-minus": "error",
     "no-this-alias": "error",
     "no-throw-literal": [
         "error",

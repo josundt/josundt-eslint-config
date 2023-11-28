@@ -150,6 +150,16 @@ module.exports = {
             "error",
             { destructuring: "all", ignoreReadBeforeAssign: false }
         ],
+        "prefer-destructuring": [
+            "warn",
+            {
+                array: true,
+                object: true
+            },
+            {
+                enforceForRenamedProperties: false
+            }
+        ],
         "prefer-exponentiation-operator": "error",
         "prefer-object-spread": "error",
         "prefer-promise-reject-errors": "error",
