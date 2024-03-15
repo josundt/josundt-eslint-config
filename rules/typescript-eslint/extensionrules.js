@@ -23,6 +23,7 @@ const extensions = new Map([
         //     ignoreClassesThatImplementAnInterface: false
         // }
     ],
+    ["consistent-return", true],
     ["default-param-last", true],
     [
         "dot-notation",
@@ -80,6 +81,7 @@ const extensions = new Map([
         "prefer-destructuring",
         [{}, { enforceForDeclarationWithTypeAnnotation: false }]
     ],
+    ["prefer-promise-reject-errors", true],
     ["require-await", true],
     ["return-await", true]
 ]);

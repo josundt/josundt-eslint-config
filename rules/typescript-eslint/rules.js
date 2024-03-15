@@ -129,10 +129,15 @@ const rules = {
             trailingUnderscore: "forbid"
         },
         {
+            selector: "import",
+            format: ["camelCase", "PascalCase"]
+        },
+        {
             selector: "enumMember",
             format: ["camelCase", "PascalCase"]
         }
     ],
+    "no-array-delete": "error",
     "no-base-to-string": "error",
     "no-confusing-non-null-assertion": "error",
     "no-confusing-void-expression": [
@@ -210,6 +215,7 @@ const rules = {
     "no-unsafe-return": "error",
     "no-unused-vars-experimental": "off", // to strict with method params...
     "no-useless-empty-export": "error",
+    "no-useless-template-literals": "error",
     "no-var-requires": "error",
     "non-nullable-type-assertion-style": "error",
     "parameter-properties": [
@@ -221,6 +227,7 @@ const rules = {
     ],
     "prefer-as-const": "off",
     "prefer-enum-initializers": "error",
+    "prefer-find": "error",
     "prefer-for-of": "error",
     "prefer-function-type": "error",
     "prefer-includes": "error",
@@ -246,7 +253,12 @@ const rules = {
     "prefer-reduce-type-parameter": "error",
     "prefer-regexp-exec": "error",
     "prefer-return-this-type": "error",
-    "prefer-string-starts-ends-with": "error",
+    "prefer-string-starts-ends-with": [
+        "error",
+        {
+            allowSingleElementEquality: "never"
+        }
+    ],
     "prefer-ts-expect-error": "error",
     "promise-function-async": "off",
     "require-array-sort-compare": [
@@ -286,7 +298,13 @@ const rules = {
             allowAny: false
         }
     ],
-    "switch-exhaustiveness-check": "error",
+    "switch-exhaustiveness-check": [
+        "error",
+        {
+            allowDefaultCaseForExhaustiveSwitch: true,
+            requireDefaultForNonUnion: false
+        }
+    ],
     "triple-slash-reference": "error",
     "type-annotation-spacing": "error", // This is a formatting rule
     "typedef": [
