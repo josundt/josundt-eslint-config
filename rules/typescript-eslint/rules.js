@@ -195,13 +195,6 @@ const rules = {
     "no-unsafe-enum-comparison": "error",
     "no-unsafe-unary-minus": "error",
     "no-this-alias": "error",
-    "no-throw-literal": [
-        "error",
-        {
-            allowThrowingAny: false, // Default is to allow throwing values of type any
-            allowThrowingUnknown: true // Default is to allow throwing values of type unknown
-        }
-    ],
     "no-unnecessary-boolean-literal-compare": "error",
     "no-unnecessary-condition": "off", // allow runtime null checks etc even if reported not necessary by type system
     "no-unnecessary-qualifier": "error",
@@ -215,9 +208,16 @@ const rules = {
     "no-unsafe-return": "error",
     "no-unused-vars-experimental": "off", // to strict with method params...
     "no-useless-empty-export": "error",
-    "no-useless-template-literals": "error",
+    "no-unnecessary-template-expression": "error",
     "no-var-requires": "error",
     "non-nullable-type-assertion-style": "error",
+    "only-throw-error": [
+        "error",
+        {
+            allowThrowingAny: false, // Default is to allow throwing values of type any
+            allowThrowingUnknown: true // Default is to allow throwing values of type unknown
+        }
+    ],
     "parameter-properties": [
         "error",
         {
@@ -259,7 +259,6 @@ const rules = {
             allowSingleElementEquality: "never"
         }
     ],
-    "prefer-ts-expect-error": "error",
     "promise-function-async": "off",
     "require-array-sort-compare": [
         "error",
@@ -278,6 +277,7 @@ const rules = {
         "error",
         {
             allowAny: false,
+            allowArray: false,
             allowBoolean: false,
             allowNever: false,
             allowNullish: false,
@@ -285,7 +285,6 @@ const rules = {
             allowRegExp: false
         }
     ],
-    "sort-type-constituents": "off",
     "strict-boolean-expressions": [
         "off",
         {
@@ -320,7 +319,8 @@ const rules = {
         }
     ],
     "unbound-method": "error",
-    "unified-signatures": "off"
+    "unified-signatures": "off",
+    "use-unknown-in-catch-callback-variable": "error"
 };
 
 // Rules - append "@typescript-eslint/" to rule names

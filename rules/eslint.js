@@ -58,6 +58,7 @@ module.exports = {
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
         "no-new-func": "error",
+        "no-new-native-nonconstructor": "error",
         "no-new-wrappers": "error",
         "no-octal-escape": "error",
         "no-redeclare": "error",
