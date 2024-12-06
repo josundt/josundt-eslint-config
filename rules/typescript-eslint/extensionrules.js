@@ -40,6 +40,7 @@ const extensions = new Map([
             exceptAfterOverload: true
         }
     ],
+    ["max-params", true],
     ["no-array-constructor", true],
     ["no-dupe-class-members", true],
     ["no-duplicate-imports", false], // typescript-eslint 5.25.0: deprecated in favour of import/no-duplicates
@@ -80,14 +81,17 @@ const extensions = new Map([
         "prefer-destructuring",
         [{}, { enforceForDeclarationWithTypeAnnotation: false }]
     ],
-    ["prefer-promise-reject-errors", true],
+    ["prefer-promise-reject-errors", {
+         allowThrowingAny: false,
+          allowThrowingUnknown: false
+    }],
     ["require-await", true],
     ["return-await", true]
 ]);
 
-// console.log(extensionRules);
-// console.log(`Converted ${Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).length} of ${extensions.size} available extension rules`);
-// console.log("Not converted:", Array.from(extensions.keys()).filter(k => !Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).includes(k)));
+// console.log(extensionRules)
+// console.log(`Converted ${Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).length} of ${extensions.size} available extension rules`)
+// console.log("Not converted:", Array.from(extensions.keys()).filter(k => !Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).includes(k)))
 
 // Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
 export const typescriptEslintExtensionrules = Object.entries(

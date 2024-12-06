@@ -124,7 +124,9 @@ const rules = {
     "no-confusing-void-expression": [
         "error",
         {
-            ignoreArrowShorthand: true
+            ignoreArrowShorthand: true,
+            ignoreVoidOperator: false,
+            ignoreVoidReturningFunctions: false
         }
     ],
     "no-deprecated": "error",
@@ -207,6 +209,7 @@ const rules = {
     "no-unsafe-call": "error",
     "no-unsafe-member-access": "error",
     "no-unsafe-return": "error",
+    "no-unsafe-type-assertion": "off", // This rule will be difficult to enable because we sometimes need to force a type assertion
     "no-useless-empty-export": "error",
     "no-unnecessary-template-expression": "error",
     "no-var-requires": "error",
@@ -263,6 +266,7 @@ const rules = {
         }
     ],
     "promise-function-async": "off",
+    "related-getter-setter-pairs": "error",
     "require-array-sort-compare": [
         "error",
         {
