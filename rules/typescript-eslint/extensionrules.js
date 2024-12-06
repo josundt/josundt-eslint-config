@@ -1,5 +1,5 @@
-const eslintRuleSet = require("../eslint.js");
-const { deepMergeObjects } = require("../../utils/merge.js");
+import eslintRuleSet from "../eslint.js";
+import { deepMergeObjects } from "../../utils/merge.js";
 
 const eslintRules = eslintRuleSet.rules;
 
@@ -56,7 +56,6 @@ const extensions = new Map([
     ["no-implied-eval", true],
     ["no-invalid-this", false],
     ["no-loop-func", true],
-    ["no-loss-of-precision", true],
     ["no-magic-numbers", true],
     ["no-redeclare", true],
     ["no-restricted-imports", true],
@@ -72,9 +71,9 @@ const extensions = new Map([
             return o;
         }
     ],
-    ["no-throw-literal", true],
+    ["no-undef", false], // Causes problems when scanning type annotations in TS code (v8.10.0)
     ["no-unused-expressions", true],
-    ["no-unused-vars", false],
+    ["no-unused-vars", true],
     ["no-use-before-define", false],
     ["no-useless-constructor", false],
     [
@@ -91,7 +90,7 @@ const extensions = new Map([
 // console.log("Not converted:", Array.from(extensions.keys()).filter(k => !Object.keys(extensionRules).filter(k => !k.startsWith("@typescript")).includes(k)));
 
 // Building eslint-typescript rules for existsing eslint rules and switching off original eslint rule
-module.exports.typescriptEslintExtensionrules = Object.entries(
+export const typescriptEslintExtensionrules = Object.entries(
     eslintRules
 ).reduce((extRules, [key, value]) => {
     // Try to get from known extensions map

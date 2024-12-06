@@ -1,10 +1,18 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "5.5.1",
+  "version": "5.6.3",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./ts-browser": "./ts-browser.js",
+    "./ts-jest-browser": "./ts-jest-browser.js",
+    "./ts-node": "./ts-node.js",
+    "./ts-jest-node": "./ts-jest-node.js"
+  },
   "main": "index.js",
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^20.9.0 || >=21.1.0"
   },
   "scripts": {
     "lint": "echo \"No linting for this project\"",
@@ -30,22 +38,25 @@
     "utils/**/*.js"
   ],
   "peerDependencies": {
-    "typescript": ">=5.5.2"
+    "typescript": ">=5.6.3"
   },
   "dependencies": {
-    "@josundt/prettier-config": "^3.3.2",
-    "@typescript-eslint/eslint-plugin": "7.14.1",
-    "@typescript-eslint/parser": "7.14.1",
-    "eslint": "8.57.0",
-    "eslint-import-resolver-typescript": "3.6.1",
-    "eslint-plugin-deprecation": "3.0.0",
+    "@josundt/prettier-config": "^3.3.3",
+    "@eslint/js": "9.14.0",
+    "@typescript-eslint/eslint-plugin": "8.13.0",
+    "@typescript-eslint/parser": "8.13.0",
+    "eslint": "9.14.0",
+    "eslint-formatter-visualstudio": "8.40.0",
+    "eslint-import-resolver-typescript": "3.6.3",
     "eslint-plugin-eslint-comments": "3.2.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jasmine": "4.2.0",
-    "eslint-plugin-jest": "28.6.0",
-    "eslint-plugin-jsdoc": "48.5.0",
-    "eslint-plugin-no-lookahead-lookbehind-regexp": "0.3.0",
-    "eslint-plugin-prettier": "5.1.3",
-    "eslint-plugin-unicorn": "54.0.0"
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jasmine": "4.2.2",
+    "eslint-plugin-jest": "28.9.0",
+    "eslint-plugin-jsdoc": "50.4.3",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-unicorn": "56.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint__js": "8.42.3"
   }
 }

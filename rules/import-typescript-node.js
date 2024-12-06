@@ -1,6 +1,10 @@
-module.exports = {
-    extends: ["plugin:import/typescript"],
-    plugins: ["import"],
+import plugin from "eslint-plugin-import";
+import { ConfigUtil } from "../utils/config-util.js";
+
+export default ConfigUtil.getPluginConfig({
+    plugin: plugin,
+    namespace: "import",
+    templateNames: ["typescript"],
     rules: {
         "import/extensions": [
             // Ensure all local .ts file imports use .js extension
@@ -17,4 +21,4 @@ module.exports = {
         "import/no-unassigned-import": "error",
         "import/order": "off"
     }
-};
+});

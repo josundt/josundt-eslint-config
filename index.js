@@ -1,1 +1,3 @@
-module.exports = require("./typescript-web-jest");
+import tsWebJest from "./typescript-web-jest.js";
+
+export default tsWebJest;

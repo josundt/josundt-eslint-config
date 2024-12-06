@@ -1,6 +1,8 @@
-module.exports = {
-    extends: ["eslint:recommended"],
+import jsPlugin from "@eslint/js";
+
+export default {
     rules: {
+        ...jsPlugin.configs.recommended.rules,
         "arrow-body-style": "error",
         "arrow-parens": ["error", "as-needed"],
         "class-methods-use-this": ["off", { enforceForClassFields: true }], // Warn when methods could be static
@@ -38,8 +40,10 @@ module.exports = {
         "no-array-constructor": "error",
         "no-bitwise": "error",
         "no-caller": "error",
+        "no-case-declarations": "error",
         "no-console": "error",
         "no-constant-binary-expression": "error",
+        "no-constant-condition": "error",
         "no-duplicate-imports": "error",
         "no-empty-function": [
             "error",
@@ -48,24 +52,45 @@ module.exports = {
             }
         ],
         "no-empty-static-block": "error",
+        "no-extra-boolean-cast": "error",
         "no-eval": "error",
         "no-extra-bind": "error",
+        "no-fallthrough": "error",
         "no-implicit-coercion": ["error", { allow: ["!!"] }],
         "no-implied-eval": "error",
-        "no-inner-declarations": "off", // Switched off from recommended rules, gave too many issues
+        "no-invalid-regexp": "error",
         "no-invalid-this": "error",
-        "no-multi-str": "error",
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
+        "no-loop-func": "off",
+        "no-misleading-character-class": "error",
+        "no-multi-str": "error",
         "no-new-func": "error",
         "no-new-native-nonconstructor": "error",
         "no-new-wrappers": "error",
         "no-octal-escape": "error",
         "no-redeclare": "error",
+        "no-restricted-exports": [
+            "off",
+            {
+                // restrictedNamedExports: [
+                //     "default" /* Disallows default exports */,
+                //     "foo",
+                //     "bar"
+                // ],
+                // restrictedNamedExportsPattern: "bar$"
+            }
+        ],
         "no-restricted-imports": [
             "off",
             {
-                paths: []
+                // paths: [
+                //     {
+                //         name: "import-foo",
+                //         importNames: ["Bar"], // optional - if only certain exports are restricted
+                //         message: "Please use Bar from /import-bar/baz/ instead."
+                //     }
+                // ]
             }
         ],
         "no-restricted-syntax": [
@@ -119,7 +144,9 @@ module.exports = {
                 allow: [] // array of identifier names for which shadowing is allowed
             }
         ],
+        "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",
+        "no-this-before-super": "error",
         "no-throw-literal": "error",
         "no-trailing-spaces": "warn",
         "no-undef-init": "error",
@@ -136,10 +163,16 @@ module.exports = {
             {
                 vars: "all",
                 args: "none",
-                destructuredArrayIgnorePattern: "^_"
+                destructuredArrayIgnorePattern: "^_",
+                ignoreRestSiblings: false,
+                caughtErrors: "all",
+                ignoreClassWithStaticInitBlock: false,
+                reportUsedIgnorePattern: false
             }
         ],
         "no-use-before-define": "error",
+        "no-useless-assignment": "error",
+        "no-useless-computed-key": "error",
         "no-useless-constructor": "error",
         "no-var": "error",
         "no-void": "error",
@@ -168,8 +201,14 @@ module.exports = {
         "quote-props": ["error", "consistent-as-needed"],
         "radix": "error",
         "require-await": "error",
-        "require-unicode-regexp": "error",
+        "require-unicode-regexp": [
+            "error",
+            {
+                requireFlag: "u" // "v" is superset of "u" but requires ES2024; adds support for "Unicode properties of strings" and "Set notation"
+            }
+        ],
         "return-await": "error",
+        "use-isnan": "error",
         "unicode-bom": ["error", "never"],
         "yoda": "error"
     }

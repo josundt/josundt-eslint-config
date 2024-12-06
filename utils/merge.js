@@ -3,10 +3,12 @@
  * @param {any} o
  * @returns o is {}
  */
- function isPlainObject(value) {
-    return  !!value &&
+function isPlainObject(value) {
+    return (
+        !!value &&
         !!(value = Object.getPrototypeOf(value)) &&
-        !Object.getPrototypeOf(value);
+        !Object.getPrototypeOf(value)
+    );
 }
 
 /**
@@ -16,9 +18,9 @@
  * @param {boolean} insertBoth
  * @returns {any[]}
  */
- function deepMergeArrays(first, second, insertBoth = true) {
-     let result = [];
-     for (let i = 0; i < Math.max(first.length, second.length); i++) {
+export function deepMergeArrays(first, second, insertBoth = true) {
+    let result = [];
+    for (let i = 0; i < Math.max(first.length, second.length); i++) {
         if (i < second.length) {
             if (i < first.length) {
                 if (Array.isArray(second[i])) {
@@ -46,8 +48,8 @@
         } else {
             result.push(first[i]);
         }
-     }
-     return result;
+    }
+    return result;
 }
 
 /**
@@ -56,7 +58,7 @@
  * @param {{}} second
  * @returns {{}}
  */
-function deepMergeObjects(first, second) {
+export function deepMergeObjects(first, second) {
     const result = {};
     const remainingKeysFromSecond = new Set(Object.keys(second));
     for (const key of Object.keys(first)) {
@@ -86,8 +88,3 @@ function deepMergeObjects(first, second) {
     }
     return result;
 }
-
-module.exports = {
-    deepMergeObjects,
-    deepMergeArrays
-};

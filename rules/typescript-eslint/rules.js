@@ -21,12 +21,6 @@ const rules = {
         }
     ],
     "ban-tslint-comment": "error", // No longer use tslint - remove rules
-    "ban-types": [
-        "error",
-        {
-            // Enable additional/disable default disabled types here
-        }
-    ],
     "class-literal-property-style": "off",
     "consistent-generic-constructors": ["off", "constructor"],
     "consistent-indexed-object-style": ["error", "record"],
@@ -81,19 +75,6 @@ const rules = {
             allowedNames: []
         }
     ],
-    "member-delimiter-style": [
-        "error",
-        {
-            multiline: {
-                delimiter: "semi",
-                requireLast: true
-            },
-            singleline: {
-                delimiter: "semi",
-                requireLast: false
-            }
-        }
-    ],
     "member-ordering": "off",
     "method-signature-style": "off", // useful rule since lambda method notation enforces stricter type checking, but has somme inconveniences for ovelaoads, "implement interface" refactoring, and general code complexity
     "naming-convention": [
@@ -146,6 +127,7 @@ const rules = {
             ignoreArrowShorthand: true
         }
     ],
+    "no-deprecated": "error",
     "no-duplicate-enum-values": "error",
     "no-duplicate-type-constituents": "error",
     "no-dynamic-delete": "error",
@@ -192,21 +174,39 @@ const rules = {
     "no-non-null-assertion": "off",
     "no-redundant-type-constituents": "error",
     "no-require-imports": "error",
+    "no-restricted-types": [
+        "error",
+        {
+            types: {
+                // // add a custom message, and tell the plugin how to fix it
+                // OldAPI: {
+                //     message: "Use NewAPI instead",
+                //     fixWith: "NewAPI"
+                // },
+                // // add a custom message, and tell the plugin how to suggest a fix
+                // SoonToBeOldAPI: {
+                //     message: "Use NewAPI instead",
+                //     suggest: ["NewAPIOne", "NewAPITwo"]
+                // }
+            }
+        }
+    ],
     "no-unsafe-enum-comparison": "error",
     "no-unsafe-unary-minus": "error",
     "no-this-alias": "error",
     "no-unnecessary-boolean-literal-compare": "error",
     "no-unnecessary-condition": "off", // allow runtime null checks etc even if reported not necessary by type system
+    "no-unnecessary-parameter-property-assignment": "error",
     "no-unnecessary-qualifier": "error",
     "no-unnecessary-type-arguments": "off",
     "no-unnecessary-type-assertion": "off",
     "no-unnecessary-type-constraint": "error",
+    "no-unnecessary-type-parameters": "off", // added but not yet switched on
     "no-unsafe-argument": "error",
     "no-unsafe-assignment": "error",
     "no-unsafe-call": "error",
     "no-unsafe-member-access": "error",
     "no-unsafe-return": "error",
-    "no-unused-vars-experimental": "off", // to strict with method params...
     "no-useless-empty-export": "error",
     "no-unnecessary-template-expression": "error",
     "no-var-requires": "error",
@@ -214,8 +214,9 @@ const rules = {
     "only-throw-error": [
         "error",
         {
-            allowThrowingAny: false, // Default is to allow throwing values of type any
-            allowThrowingUnknown: true // Default is to allow throwing values of type unknown
+            allow: [],
+            allowThrowingAny: false, // Default is to disallow throwing values of type any
+            allowThrowingUnknown: false // Default is to disallow throwing values of type unknown
         }
     ],
     "parameter-properties": [
@@ -236,9 +237,11 @@ const rules = {
     "prefer-nullish-coalescing": [
         "error",
         {
+            allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
             ignoreConditionalTests: true,
-            ignoreTernaryTests: true,
-            ignoreMixedLogicalExpressions: true,
+            ignoreTernaryTests: false,
+            ignoreMixedLogicalExpressions: false,
+            ignoreBooleanCoercion: false,
             ignorePrimitives: {
                 string: false,
                 number: false,
@@ -276,6 +279,7 @@ const rules = {
     "restrict-template-expressions": [
         "error",
         {
+            allow: [{ name: ["URL", "URLSearchParams"], from: "lib" }],
             allowAny: false,
             allowArray: false,
             allowBoolean: false,
@@ -301,11 +305,11 @@ const rules = {
         "error",
         {
             allowDefaultCaseForExhaustiveSwitch: true,
+            considerDefaultExhaustiveForUnions: true,
             requireDefaultForNonUnion: false
         }
     ],
     "triple-slash-reference": "error",
-    "type-annotation-spacing": "error", // This is a formatting rule
     "typedef": [
         "error",
         {
@@ -324,7 +328,7 @@ const rules = {
 };
 
 // Rules - append "@typescript-eslint/" to rule names
-module.exports.typescriptEslintRules = Object.entries(rules).reduce(
+export const typescriptEslintRules = Object.entries(rules).reduce(
     (aggr, [key, value]) => ({
         ...aggr,
         [`@typescript-eslint/${key}`]: value
