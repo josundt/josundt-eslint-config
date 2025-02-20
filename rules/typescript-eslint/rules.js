@@ -141,7 +141,13 @@ const rules = {
         }
     ],
     "no-extra-non-null-assertion": "error",
-    "no-extraneous-class": "error",
+    "no-extraneous-class": ["error", {
+
+        allowConstructorOnly: false, // Whether to allow extraneous classes that contain only a constructor.
+        allowEmpty: false, // Whether to allow extraeous classes that have no body (i.e. are empty).
+        allowStaticOnly: true, // Whether to allow extraneous classes that only contain static members.
+        allowWithDecorator: false // Whether to allow extraneous classes that include a decorator.
+    }],
     "no-floating-promises": "error", // Must be switched on to prevent promises not awaited
     "no-for-in-array": "error",
     "no-import-type-side-effects": "error",
