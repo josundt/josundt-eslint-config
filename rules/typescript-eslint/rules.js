@@ -27,6 +27,7 @@ const rules = {
     "consistent-type-assertions": [
         "error",
         {
+            arrayLiteralTypeAssertions: "allow",
             assertionStyle: "as",
             objectLiteralTypeAssertions: "allow"
         }
@@ -70,9 +71,10 @@ const rules = {
         {
             allowArgumentsExplicitlyTypedAsAny: false,
             allowDirectConstAssertionInArrowFunctions: true,
+            allowedNames: [],
             allowHigherOrderFunctions: true,
-            allowTypedFunctionExpressions: true,
-            allowedNames: []
+            allowOverloadFunctions: false,
+            allowTypedFunctionExpressions: true
         }
     ],
     "member-ordering": "off",
@@ -141,13 +143,15 @@ const rules = {
         }
     ],
     "no-extra-non-null-assertion": "error",
-    "no-extraneous-class": ["error", {
-
-        allowConstructorOnly: false, // Whether to allow extraneous classes that contain only a constructor.
-        allowEmpty: false, // Whether to allow extraeous classes that have no body (i.e. are empty).
-        allowStaticOnly: true, // Whether to allow extraneous classes that only contain static members.
-        allowWithDecorator: false // Whether to allow extraneous classes that include a decorator.
-    }],
+    "no-extraneous-class": [
+        "error",
+        {
+            allowConstructorOnly: false, // Whether to allow extraneous classes that contain only a constructor.
+            allowEmpty: false, // Whether to allow extraeous classes that have no body (i.e. are empty).
+            allowStaticOnly: true, // Whether to allow extraneous classes that only contain static members.
+            allowWithDecorator: false // Whether to allow extraneous classes that include a decorator.
+        }
+    ],
     "no-floating-promises": "error", // Must be switched on to prevent promises not awaited
     "no-for-in-array": "error",
     "no-import-type-side-effects": "error",
@@ -175,6 +179,7 @@ const rules = {
             // }
         }
     ],
+    "no-misused-spread": "error",
     "no-mixed-enums": "error",
     "no-namespace": "off",
     "no-non-null-asserted-nullish-coalescing": "error",
@@ -202,7 +207,13 @@ const rules = {
     "no-unsafe-enum-comparison": "error",
     "no-unsafe-unary-minus": "error",
     "no-this-alias": "error",
-    "no-unnecessary-boolean-literal-compare": "error",
+    "no-unnecessary-boolean-literal-compare": [
+        "error",
+        {
+            allowComparingNullableBooleansToFalse: true,
+            allowComparingNullableBooleansToTrue: true
+        }
+    ],
     "no-unnecessary-condition": "off", // allow runtime null checks etc even if reported not necessary by type system
     "no-unnecessary-parameter-property-assignment": "error",
     "no-unnecessary-qualifier": "error",
@@ -302,13 +313,15 @@ const rules = {
     "strict-boolean-expressions": [
         "off",
         {
-            allowString: true,
-            allowNumber: true,
+            allowAny: false,
+            allowNullableBoolean: true,
+            allowNullableEnum: true,
+            allowNullableNumber: true,
             allowNullableObject: true,
             allowNullableString: true,
-            allowNullableNumber: true,
-            allowNullableBoolean: true,
-            allowAny: false
+            allowNumber: true,
+            allowString: true
+            //allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
         }
     ],
     "switch-exhaustiveness-check": [
