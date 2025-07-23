@@ -229,6 +229,7 @@ const rules = {
     "no-unsafe-type-assertion": "off", // This rule will be difficult to enable because we sometimes need to force a type assertion
     "no-useless-empty-export": "error",
     "no-unnecessary-template-expression": "error",
+    "no-unnecessary-type-conversion": "error",
     "no-var-requires": "error",
     "non-nullable-type-assertion-style": "error",
     "only-throw-error": [
@@ -262,6 +263,7 @@ const rules = {
             ignoreTernaryTests: false,
             ignoreMixedLogicalExpressions: false,
             ignoreBooleanCoercion: false,
+            ignoreIfStatements: false,
             ignorePrimitives: {
                 string: false,
                 number: false,
