@@ -1,6 +1,6 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "5.8.1",
+  "version": "5.9.2",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "type": "module",
   "exports": {
@@ -38,22 +38,22 @@
     "utils/**/*.js"
   ],
   "peerDependencies": {
-    "typescript": ">=5.8.2"
+    "typescript": ">=5.9.2"
   },
   "dependencies": {
     "@josundt/prettier-config": "^3.6.2",
-    "@eslint/js": "9.31.0",
-    "@typescript-eslint/eslint-plugin": "8.38.0",
-    "@typescript-eslint/parser": "8.38.0",
-    "eslint": "9.31.0",
+    "@eslint/js": "9.33.0",
+    "@typescript-eslint/eslint-plugin": "8.39.0",
+    "@typescript-eslint/parser": "8.39.0",
+    "eslint": "9.33.0",
     "eslint-formatter-visualstudio": "8.40.0",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jasmine": "4.2.2",
     "eslint-plugin-jest": "29.0.1",
-    "eslint-plugin-jsdoc": "51.4.1",
-    "eslint-plugin-prettier": "5.5.3",
+    "eslint-plugin-jsdoc": "52.0.4",
+    "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-unicorn": "60.0.0"
   },
   "devDependencies": {
