@@ -224,12 +224,18 @@ const rules = {
     "no-unsafe-argument": "error",
     "no-unsafe-assignment": "error",
     "no-unsafe-call": "error",
-    "no-unsafe-member-access": "error",
+    "no-unsafe-member-access": [
+        "error",
+        {
+            allowOptionalChaining: false
+        }
+    ],
     "no-unsafe-return": "error",
     "no-unsafe-type-assertion": "off", // This rule will be difficult to enable because we sometimes need to force a type assertion
     "no-useless-empty-export": "error",
     "no-unnecessary-template-expression": "error",
     "no-unnecessary-type-conversion": "error",
+    "no-useless-default-assignment": "error",
     "no-var-requires": "error",
     "non-nullable-type-assertion-style": "error",
     "only-throw-error": [
@@ -324,6 +330,12 @@ const rules = {
             allowNumber: true,
             allowString: true
             //allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
+        }
+    ],
+    "strict-void-return": [
+        "error",
+        {
+            allowReturnAny: false
         }
     ],
     "switch-exhaustiveness-check": [

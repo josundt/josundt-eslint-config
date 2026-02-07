@@ -90,7 +90,8 @@ export default {
                 //         importNames: ["Bar"], // optional - if only certain exports are restricted
                 //         message: "Please use Bar from /import-bar/baz/ instead."
                 //     }
-                // ]
+                // ],
+                // allowTypeImports: true
             }
         ],
         "no-restricted-syntax": [
@@ -198,6 +199,12 @@ export default {
         "prefer-object-spread": "error",
         "prefer-promise-reject-errors": "error",
         "prefer-template": "error",
+        "preserve-caught-error": [
+            "error",
+            {
+                requireCatchParameter: false // make catch block error parameter mandatory
+            }
+        ],
         "quote-props": ["error", "consistent-as-needed"],
         "radix": "error",
         "require-await": "error",

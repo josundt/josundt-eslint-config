@@ -74,6 +74,7 @@ const extensions = new Map([
     ],
     ["no-undef", false], // Causes problems when scanning type annotations in TS code (v8.10.0)
     ["no-unused-expressions", true],
+    ["no-unused-private-class-members", false], // Buggy rule, false positives (13.01.2026)
     ["no-unused-vars", true],
     ["no-use-before-define", false],
     ["no-useless-constructor", false],
@@ -81,10 +82,13 @@ const extensions = new Map([
         "prefer-destructuring",
         [{}, { enforceForDeclarationWithTypeAnnotation: false }]
     ],
-    ["prefer-promise-reject-errors", {
-         allowThrowingAny: false,
-          allowThrowingUnknown: false
-    }],
+    [
+        "prefer-promise-reject-errors",
+        {
+            allowThrowingAny: false,
+            allowThrowingUnknown: false
+        }
+    ],
     ["require-await", true],
     ["return-await", true]
 ]);
