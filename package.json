@@ -1,6 +1,6 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "5.9.3",
+  "version": "5.9.4",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "type": "module",
   "exports": {
@@ -41,7 +41,7 @@
     "typescript": ">=5.9.3"
   },
   "dependencies": {
-    "@adra/prettier-config": "^3.7.4",
+    "@josundt/prettier-config": "^3.7.4",
     "@eslint/js": "9.39.2",
     "@typescript-eslint/eslint-plugin": "8.53.0",
     "@typescript-eslint/parser": "8.53.0",
