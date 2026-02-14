@@ -1,14 +1,29 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "5.9.4",
+  "version": "5.9.5",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "type": "module",
   "exports": {
-    ".": "./index.js",
-    "./ts-browser": "./ts-browser.js",
-    "./ts-jest-browser": "./ts-jest-browser.js",
-    "./ts-node": "./ts-node.js",
-    "./ts-jest-node": "./ts-jest-node.js"
+    ".": {
+      "types": "./eslint-linter-config.d.ts",
+      "default": "./index.js"
+    },
+    "./ts-browser": {
+      "types": "./eslint-linter-config.d.ts",
+      "default": "./ts-browser.js"
+    },
+    "./ts-jest-browser": {
+      "types": "./eslint-linter-config.d.ts",
+      "default": "./ts-jest-browser.js"
+    },
+    "./ts-node": {
+      "types": "./eslint-linter-config.d.ts",
+      "default": "./ts-node.js"
+    },
+    "./ts-jest-node": {
+      "types": "./eslint-linter-config.d.ts",
+      "default": "./ts-jest-node.js"
+    }
   },
   "main": "index.js",
   "engines": {
