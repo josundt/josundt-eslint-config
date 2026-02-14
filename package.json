@@ -1,6 +1,6 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "5.9.6",
+  "version": "5.9.7",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "type": "module",
   "exports": {
@@ -57,8 +57,8 @@
     "typescript": ">=5.9.3"
   },
   "dependencies": {
-    "@josundt/prettier-config": "^3.7.4",
     "@eslint/js": "9.39.2",
+    "@josundt/prettier-config": "^3.7.4",
     "@typescript-eslint/eslint-plugin": "8.53.0",
     "@typescript-eslint/parser": "8.53.0",
     "eslint": "9.39.2",
@@ -70,7 +70,8 @@
     "eslint-plugin-jest": "29.12.1",
     "eslint-plugin-jsdoc": "62.0.0",
     "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-unicorn": "62.0.0"
+    "eslint-plugin-unicorn": "62.0.0",
+    "jiti": "^2.6.1"
   },
   "devDependencies": {
     "@types/eslint__js": "9.14.0"
