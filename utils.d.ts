@@ -14,9 +14,8 @@ interface TsLanguageOptions {
     parserOptions: TsParserOptions;
 }
 
-interface TsLinterConfig extends Omit<Linter.Config, "languageOptions"> {
+export interface TsLinterConfig extends Omit<Linter.Config, "languageOptions"> {
     languageOptions: TsLanguageOptions;
 }
 
-declare const exp: TsLinterConfig;
-export default exp;
+export function setTsConfig(path: string, cfg: TsLinterConfig): TsLinterConfig;

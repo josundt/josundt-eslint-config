@@ -1,28 +1,32 @@
 {
   "name": "@josundt/eslint-config",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "ESLint ruleset with required plugins for josundt TypeScript projects",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./eslint-linter-config.d.ts",
+      "types": "./preset.d.ts",
       "default": "./index.js"
     },
     "./ts-browser": {
-      "types": "./eslint-linter-config.d.ts",
+      "types": "./preset.d.ts",
       "default": "./ts-browser.js"
     },
     "./ts-jest-browser": {
-      "types": "./eslint-linter-config.d.ts",
+      "types": "./preset.d.ts",
       "default": "./ts-jest-browser.js"
     },
     "./ts-node": {
-      "types": "./eslint-linter-config.d.ts",
+      "types": "./preset.d.ts",
       "default": "./ts-node.js"
     },
     "./ts-jest-node": {
-      "types": "./eslint-linter-config.d.ts",
+      "types": "./preset.d.ts",
       "default": "./ts-jest-node.js"
+    },
+    "./utils": {
+      "types": "./utils.d.ts",
+      "default": "./utils.js"
     }
   },
   "main": "index.js",
